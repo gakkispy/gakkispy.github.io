@@ -1,0 +1,823 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="canvas,参数," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、Canvas
+Canvas就是一个画布，可以进行画任何的线、图形、填充等一系列的操作，而且操作的画图就是js，所以让js编程到了嗑药的地步。另外Canvas不仅仅提供简单的二维矢量绘图，也提供了三维的绘图，以及图片处理等一系列的api支持。
+二、Canvas中的Context
+要使用Canvas来绘制图形必须在页面中添加Canvas的标签12345&amp;lt;canvas id=&quot;demoCanv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Canvas的一些参数">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/canvas-property/index.html">
+<meta property="og:site_name" content="红头发的韦斯莱">
+<meta property="og:description" content="一、Canvas
+Canvas就是一个画布，可以进行画任何的线、图形、填充等一系列的操作，而且操作的画图就是js，所以让js编程到了嗑药的地步。另外Canvas不仅仅提供简单的二维矢量绘图，也提供了三维的绘图，以及图片处理等一系列的api支持。
+二、Canvas中的Context
+要使用Canvas来绘制图形必须在页面中添加Canvas的标签12345&amp;lt;canvas id=&quot;demoCanv">
+<meta property="og:updated_time" content="2017-03-27T15:00:33.256Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于Canvas的一些参数">
+<meta name="twitter:description" content="一、Canvas
+Canvas就是一个画布，可以进行画任何的线、图形、填充等一系列的操作，而且操作的画图就是js，所以让js编程到了嗑药的地步。另外Canvas不仅仅提供简单的二维矢量绘图，也提供了三维的绘图，以及图片处理等一系列的api支持。
+二、Canvas中的Context
+要使用Canvas来绘制图形必须在页面中添加Canvas的标签12345&amp;lt;canvas id=&quot;demoCanv">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/27/canvas-property/"/>
+
+
+
+
+
+  <title> 关于Canvas的一些参数 | 红头发的韦斯莱 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title" data-text="红头发的韦斯莱">红头发的韦斯莱</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/canvas-property/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="gakkispy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="红头发的韦斯莱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于Canvas的一些参数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T22:52:28+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、Canvas"><a href="#一、Canvas" class="headerlink" title="一、Canvas"></a>一、Canvas</h1><hr>
+<p>Canvas就是一个画布，可以进行画任何的线、图形、填充等一系列的操作，而且操作的画图就是js，所以让js编程到了嗑药的地步。另外Canvas不仅仅提供简单的二维矢量绘图，也提供了三维的绘图，以及图片处理等一系列的api支持。</p>
+<h1 id="二、Canvas中的Context"><a href="#二、Canvas中的Context" class="headerlink" title="二、Canvas中的Context"></a>二、Canvas中的Context</h1><ol>
+<li>要使用Canvas来绘制图形必须在页面中添加Canvas的标签<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"demoCanvas"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">  请使用支持HTML5的浏览器查看本实例</div><div class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><p>只有上面的标签，只能是创建好了一个画布，其中<em>width</em> 和<em>height</em>       属性就是设置画布的大小。Id属性也是必须的，后面要用Id来拿到当前的 <em>Canvas</em> 的Dom对象。通过此 <em>Canvase</em> 的Dom对象就可以获取他的上下文<em> （Context）</em> 了， <em>Canvas</em> 绘制图形都是靠着 <em>Canvas</em> 对象的上下文对象</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="comment">//第一步：获取canvas元素</span></div><div class="line"><span class="keyword">var</span> canvasDom = <span class="built_in">document</span>.getElementById(<span class="string">"demoCanvas"</span>);</div><div class="line"><span class="comment">//第二步：获取上下文</span></div><div class="line"><span class="keyword">var</span> context = canvasDom.getContext(<span class="string">'2d'</span>);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Context上下文默认两种绘制方式： 第一种：绘制线（stroke） 第二种：填充（fill）</p>
+<h1 id="三、Canvas绘制立体透明矩形"><a href="#三、Canvas绘制立体透明矩形" class="headerlink" title="三、Canvas绘制立体透明矩形"></a>三、Canvas绘制立体透明矩形</h1></li>
+</ol>
+<hr>
+<h2 id="1-Canvas绘制步骤："><a href="#1-Canvas绘制步骤：" class="headerlink" title="1. Canvas绘制步骤："></a>1. Canvas绘制步骤：</h2><ul>
+<li><strong>创建HTML页面，设置画布标签</strong></li>
+<li><strong>编写js，获取画布dom对象</strong></li>
+<li><strong>通过canvas标签的Dom对象获取上下文</strong></li>
+<li><strong>设置绘制样式、颜色</strong></li>
+<li><strong>绘制矩形，或者填充矩形</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"demoCanvas"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>请使用支持HTML5的浏览器查看本实例<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!---下面将演示一种绘制矩形的demo---&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="comment">//第一步：获取canvas元素</span></div><div class="line">        <span class="keyword">var</span> canvasDom = <span class="built_in">document</span>.getElementById(<span class="string">"demoCanvas"</span>);</div><div class="line">        <span class="comment">//第二步：获取上下文</span></div><div class="line">        <span class="keyword">var</span> context = canvasDom.getContext(<span class="string">'2d'</span>);</div><div class="line">        <span class="comment">//第三步：指定绘制线样式、颜色</span></div><div class="line">        context.strokeStyle = <span class="string">"red"</span>;</div><div class="line">        <span class="comment">//第四步：绘制矩形，只有线。内容是空的</span></div><div class="line">        context.strokeRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">190</span>, <span class="number">100</span>);</div><div class="line">        <span class="comment">//以下演示填充矩形。</span></div><div class="line">        context.fillStyle = <span class="string">"blue"</span>;</div><div class="line">        context.fillRect(<span class="number">110</span>,<span class="number">110</span>,<span class="number">100</span>,<span class="number">100</span>);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="四、Canvas绘制线条"><a href="#四、Canvas绘制线条" class="headerlink" title="四、Canvas绘制线条"></a>四、Canvas绘制线条</h1><hr>
+<p>Context  对象的  beginPath  方法表示开始绘制路径，moveTo(x, y)方法设置线段的起点，<br>lineTo(x, y)方法设置线段的终点，stroke方法用来给透明的线段着色。<br>moveto和lineto方法可以多次使用。最后，还可以使用closePath方法，自动绘制一条当前点到起点的直线，形成一个封闭图形，省却使用一次lineto方法。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"demoCanvas"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"600"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="comment">//通过id获得当前的Canvas对象</span></div><div class="line">        <span class="keyword">var</span> canvasDom = <span class="built_in">document</span>.getElementById(<span class="string">"demoCanvas"</span>);</div><div class="line">        <span class="comment">//通过Canvas Dom对象获取Context的对象</span></div><div class="line">        <span class="keyword">var</span> context = canvasDom.getContext(<span class="string">"2d"</span>);</div><div class="line">        context.beginPath(); <span class="comment">// 开始路径绘制</span></div><div class="line">        context.moveTo(<span class="number">20</span>, <span class="number">20</span>); <span class="comment">// 设置路径起点，坐标为(20,20)</span></div><div class="line">        context.lineTo(<span class="number">200</span>, <span class="number">200</span>); <span class="comment">// 绘制一条到(200,20)的直线</span></div><div class="line">        context.lineTo(<span class="number">400</span>, <span class="number">20</span>);</div><div class="line">        context.closePath();</div><div class="line">        context.lineWidth = <span class="number">2.0</span>; <span class="comment">// 设置线宽</span></div><div class="line">        context.strokeStyle = <span class="string">"#CC0000"</span>; <span class="comment">// 设置线的颜色</span></div><div class="line">        context.stroke(); <span class="comment">// 进行线的着色，这时整条线才变得可见</span></div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h1 id="五、Canvas绘制文本"><a href="#五、Canvas绘制文本" class="headerlink" title="五、Canvas绘制文本"></a>五、Canvas绘制文本</h1><hr>
+<p>Context上下文对象的fillText(string, x, y)方法是用来绘制文本，它的三个参数分别为文本内容、起点的x坐标、y坐标。使用之前，需用font设置字体、大小、样式（写法类似与CSS的font属性）。与此类似的还有strokeText方法，用来添加空心字。</p>
+<h4 id="另外注意一点："><a href="#另外注意一点：" class="headerlink" title="另外注意一点："></a><strong>另外注意一点：</strong></h4><p><strong>fillText方法不支持文本断行，即所有文本出现在一行内。所以，如果要生成多行文本，只有调用多次fillText方法。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"demoCanvas"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"600"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="comment">//通过id获得当前的Canvas对象</span></div><div class="line">    <span class="keyword">var</span> canvasDom = <span class="built_in">document</span>.getElementById(<span class="string">"demoCanvas"</span>);</div><div class="line">    <span class="comment">//通过Canvas Dom对象获取Context的对象</span></div><div class="line">    <span class="keyword">var</span> context = canvasDom.getContext(<span class="string">"2d"</span>);</div><div class="line">    context.moveTo(<span class="number">200</span>,<span class="number">200</span>);</div><div class="line">    <span class="comment">// 设置字体</span></div><div class="line">    context.font = <span class="string">"Bold 50px Arial"</span>;</div><div class="line">    <span class="comment">// 设置对齐方式</span></div><div class="line">    context.textAlign = <span class="string">"left"</span>;</div><div class="line">    <span class="comment">// 设置填充颜色</span></div><div class="line">    context.fillStyle = <span class="string">"#005600"</span>;</div><div class="line">    <span class="comment">// 设置字体内容，以及在画布上的位置</span></div><div class="line">    context.fillText(<span class="string">"老马!"</span>, <span class="number">10</span>, <span class="number">50</span>);</div><div class="line">    <span class="comment">// 绘制空心字</span></div><div class="line">    context.strokeText(<span class="string">"blog.itjeek.com!"</span>, <span class="number">10</span>, <span class="number">100</span>);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="六、Canvas绘制圆形和椭圆"><a href="#六、Canvas绘制圆形和椭圆" class="headerlink" title="六、Canvas绘制圆形和椭圆"></a>六、Canvas绘制圆形和椭圆</h1><hr>
+<p>Context上下文的arc方法就是绘制圆形或者椭圆，arc方法的x和y参数是圆心坐标，radius是半径，startAngle和endAngle则是扇形的起始角度和终止角度（以弧度表示），anticlockwise表示做图时应该逆时针画（true）还是顺时针画（false）。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"demoCanvas"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"600"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="comment">//通过id获得当前的Canvas对象</span></div><div class="line">    <span class="keyword">var</span> canvasDom = <span class="built_in">document</span>.getElementById(<span class="string">"demoCanvas"</span>);</div><div class="line">    <span class="comment">//通过Canvas Dom对象获取Context的对象</span></div><div class="line">    <span class="keyword">var</span> context = canvasDom.getContext(<span class="string">"2d"</span>);</div><div class="line">    context.beginPath();<span class="comment">//开始绘制路径</span></div><div class="line">    <span class="comment">//绘制以 （60,60）为圆心，50为半径长度，从0度到360度（PI是180度），最后一个参数代表顺时针旋转。</span></div><div class="line">    context.arc(<span class="number">60</span>, <span class="number">60</span>, <span class="number">50</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>);</div><div class="line">    context.lineWidth = <span class="number">2.0</span>;<span class="comment">//线的宽度</span></div><div class="line">    context.strokeStyle = <span class="string">"#000"</span>;<span class="comment">//线的样式</span></div><div class="line">    context.stroke();<span class="comment">//绘制空心的，当然如果使用fill那就是填充了。</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="七、Canvas绘制图片"><a href="#七、Canvas绘制图片" class="headerlink" title="七、Canvas绘制图片"></a>七、Canvas绘制图片</h1><hr>
+<p>Canvas绘制图片应该是他的一大特点或者是亮点吧。当然配合File的API，让JS变得无可匹敌。那接下里给大家演示一下怎样绘制图片，并且做出一个立体效果出来。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"demoCanvas"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"600"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="comment">//通过id获得当前的Canvas对象</span></div><div class="line">    <span class="keyword">var</span> canvasDom = <span class="built_in">document</span>.getElementById(<span class="string">"demoCanvas"</span>);</div><div class="line">    <span class="comment">//通过Canvas Dom对象获取Context的对象</span></div><div class="line">    <span class="keyword">var</span> context = canvasDom.getContext(<span class="string">"2d"</span>);</div><div class="line">    <span class="keyword">var</span> image = <span class="keyword">new</span> Image();<span class="comment">//创建一张图片</span></div><div class="line">    image.src = <span class="string">"Images/a.png"</span>;<span class="comment">//设置图片的路径</span></div><div class="line">    image.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="comment">//当图片加载完成后</span></div><div class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;<span class="comment">//输出10张照片</span></div><div class="line">            <span class="comment">//参数：（1）绘制的图片  （2）坐标x，（3）坐标y</span></div><div class="line">            context.drawImage(image, <span class="number">100</span> + i * <span class="number">80</span>, <span class="number">100</span> + i * <span class="number">80</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/canvas/" rel="tag"># canvas</a>
+          
+            <a href="/tags/参数/" rel="tag"># 参数</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/27/h5-newTitle/" rel="next" title="HTML5中的新结构标签">
+                <i class="fa fa-chevron-left"></i> HTML5中的新结构标签
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/27/h5-newTitle-01/" rel="prev" title="HTML中的增强型表单标签">
+                HTML中的增强型表单标签 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="gakkispy" />
+          <p class="site-author-name" itemprop="name">gakkispy</p>
+           
+              <p class="site-description motion-element" itemprop="description">前端|搞机|菜鸡</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gakkispy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://codepen.io/Sunplantlist/" target="_blank" title="CodePen">
+                  
+                    <i class="fa fa-fw fa-codepen"></i>
+                  
+                  CodePen
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2249052642" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、Canvas"><span class="nav-number">1.</span> <span class="nav-text">一、Canvas</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Canvas中的Context"><span class="nav-number">2.</span> <span class="nav-text">二、Canvas中的Context</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、Canvas绘制立体透明矩形"><span class="nav-number">3.</span> <span class="nav-text">三、Canvas绘制立体透明矩形</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Canvas绘制步骤："><span class="nav-number">3.1.</span> <span class="nav-text">1. Canvas绘制步骤：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、Canvas绘制线条"><span class="nav-number">4.</span> <span class="nav-text">四、Canvas绘制线条</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、Canvas绘制文本"><span class="nav-number">5.</span> <span class="nav-text">五、Canvas绘制文本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#另外注意一点："><span class="nav-number">5.0.0.1.</span> <span class="nav-text">另外注意一点：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、Canvas绘制圆形和椭圆"><span class="nav-number">6.</span> <span class="nav-text">六、Canvas绘制圆形和椭圆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、Canvas绘制图片"><span class="nav-number">7.</span> <span class="nav-text">七、Canvas绘制图片</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gakkispy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

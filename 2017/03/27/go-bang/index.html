@@ -1,0 +1,841 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="慕课网,五子棋," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="创建赢法数组
+
+
+先贴出第一步代码
+1234567var wins = [];for(let i=0 ; i &amp;lt; 15 ; i++ ) &amp;#123;    wins[i] = [];    for(let j = 0; j&amp;lt;15; j++) &amp;#123;        wins[i][j] = [];    &amp;#125;&amp;#125;
+
+这段代码仅仅只是创了一个准备用于记录所有赢法的三">
+<meta property="og:type" content="article">
+<meta property="og:title" content="慕课网-人机大战五子棋AI篇学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/go-bang/index.html">
+<meta property="og:site_name" content="红头发的韦斯莱">
+<meta property="og:description" content="创建赢法数组
+
+
+先贴出第一步代码
+1234567var wins = [];for(let i=0 ; i &amp;lt; 15 ; i++ ) &amp;#123;    wins[i] = [];    for(let j = 0; j&amp;lt;15; j++) &amp;#123;        wins[i][j] = [];    &amp;#125;&amp;#125;
+
+这段代码仅仅只是创了一个准备用于记录所有赢法的三">
+<meta property="og:image" content="http://img.mukewang.com/58cb896e0001b9b812800720.jpg">
+<meta property="og:image" content="http://img.mukewang.com/58cbbc5900017d8012800720.jpg">
+<meta property="og:updated_time" content="2017-03-27T14:33:23.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="慕课网-人机大战五子棋AI篇学习笔记">
+<meta name="twitter:description" content="创建赢法数组
+
+
+先贴出第一步代码
+1234567var wins = [];for(let i=0 ; i &amp;lt; 15 ; i++ ) &amp;#123;    wins[i] = [];    for(let j = 0; j&amp;lt;15; j++) &amp;#123;        wins[i][j] = [];    &amp;#125;&amp;#125;
+
+这段代码仅仅只是创了一个准备用于记录所有赢法的三">
+<meta name="twitter:image" content="http://img.mukewang.com/58cb896e0001b9b812800720.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/27/go-bang/"/>
+
+
+
+
+
+  <title> 慕课网-人机大战五子棋AI篇学习笔记 | 红头发的韦斯莱 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title" data-text="红头发的韦斯莱">红头发的韦斯莱</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/go-bang/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="gakkispy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="红头发的韦斯莱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                慕课网-人机大战五子棋AI篇学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T21:44:30+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><h2 id="创建赢法数组"><a href="#创建赢法数组" class="headerlink" title="创建赢法数组"></a>创建赢法数组</h2></li>
+</ul>
+<ol>
+<li><p>先贴出第一步代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> wins = [];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i &lt; <span class="number">15</span> ; i++ ) &#123;</div><div class="line">    wins[i] = [];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j&lt;<span class="number">15</span>; j++) &#123;</div><div class="line">        wins[i][j] = [];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这段代码仅仅只是创了一个准备用于记录所有赢法的<strong>三维空数组</strong>。</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li>接下来第二部就是建立赢法数组，复制并建立索引。<br>代码：<strong>竖排</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt; <span class="number">15</span> ;i++) &#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">11</span> ;j++) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;<span class="number">5</span>;k++) &#123;</div><div class="line">            wins[i][j+k][count] = <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        count++;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<a id="more"></a>
+<blockquote>
+<p>本段代码的含义就是遍历了所有竖排列中存在的赢的组合，count为每一种赢法所对应的唯一索引。<br>例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wins[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">wins[<span class="number">0</span>][<span class="number">1</span>][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">wins[<span class="number">0</span>][<span class="number">2</span>][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">wins[<span class="number">0</span>][<span class="number">3</span>][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">wins[<span class="number">0</span>][<span class="number">4</span>][<span class="number">0</span>] = <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
+<p>就是意味着我们将第一竖排前五个空格连成一线的赢法都列举出来，并给每一个格子赋值为true、给出的索引为count = 0（即第三维数组）。</p>
+</blockquote>
+<p>同理，很容易可以写出遍历横排，45°角和135°角排列上的代码：</p>
+<p><strong>横排</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt; <span class="number">15</span> ;i++) &#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">11</span> ;j++) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;<span class="number">5</span>;k++) &#123;</div><div class="line">            wins[j+k][i][count] = <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        count++;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>45°</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt; <span class="number">11</span> ;i++) &#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">11</span> ;j++) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;<span class="number">5</span>;k++) &#123;</div><div class="line">            wins[i+k][j+k][count] = <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        count++;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>135°</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt; <span class="number">11</span> ;i++) &#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">14</span>;j&gt;<span class="number">3</span> ;j++) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;<span class="number">5</span>;k++) &#123;</div><div class="line">            wins[i+k][j-k][count] = <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        count++;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>相较于较为抽象的描述，还是图来的简单明了。<br><img src="http://img.mukewang.com/58cb896e0001b9b812800720.jpg" alt="image"></p>
+<h2 id="输赢判断"><a href="#输赢判断" class="headerlink" title="输赢判断"></a>输赢判断</h2><p>慕课网将其称为赢法统计，我总觉得过于抽象了。让我来理解，说是输赢判断，或者说是<em>迈向胜利的进度</em>，更加容易理解。<br>代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myWin = [];<span class="comment">//我方胜利进度（黑子）</span></div><div class="line"><span class="keyword">var</span> coumputerWin = [];<span class="comment">//电脑方胜利进度(白子)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; count ; i++) &#123;</div><div class="line">    myWin[i] = <span class="number">0</span>;</div><div class="line">    coumputerWin[i] = <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>首相遍历count，两方胜利进度数组都赋值为0。</p>
+</blockquote>
+<p>然后就要修改落子时的onclick事件的判定条件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">var over = false;//判断棋局是否结束</div><div class="line">chess.onclick = function(e) &#123;</div><div class="line">    if(over) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    var x = e.offsetX;</div><div class="line">    var y = e.offsetY;</div><div class="line">    var i= Math.floor(x/30);</div><div class="line">    var j = Math.floor(y/30);</div><div class="line">    if(hascheer[i][j] == 0) &#123;</div><div class="line">        oneStep(i,j,me);</div><div class="line">        if(me) &#123;</div><div class="line">            hascheer[i][j] = 1;</div><div class="line">        &#125;else &#123;</div><div class="line">            hascheer[i][j] = 2;</div><div class="line">        &#125;</div><div class="line">        me = !me;</div><div class="line"></div><div class="line"></div><div class="line">        //本次操作添加代码</div><div class="line">        for(let k= 0;k&lt;count; k++) &#123;</div><div class="line">            if(wins[i][j][k]) &#123;</div><div class="line">                myWin[k] ++;</div><div class="line">                pcWin = 6;//当有一方占据了当前赢法数组中的一格，即可判定为另一方在该赢法数组条件下已不可能获胜，抛出异常数值。</div><div class="line">                if(myWin[k] == 5) &#123;</div><div class="line">                    window.alert(&quot;你赢了!&quot;);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>前面的代码是UI篇当中的。关于输赢判断，思路是在onclick事件下，每次落子，遍历count,并对落子坐标i,j所对应的赢法k胜利进度+1，胜利进度=5的时候，就代表在这一赢法下获胜了。</p>
+<p>例如，在wins[0][0][k]的情况下，其实只有三种赢法，即向右五格，向下五格以及45°角五格，因此，当k不等于这三种赢法的索引时，myWins[k]就不会自加，即该赢法进度没有变化。<em>PS：后面要做computer自动下子，所以这里只写了黑子的判定</em>。</p>
+</blockquote>
+<hr>
+<h2 id="AI实现"><a href="#AI实现" class="headerlink" title="AI实现"></a>AI实现</h2><p>代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> pcAI = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//玩家分数</span></div><div class="line">	<span class="keyword">let</span> myScore = [],</div><div class="line"><span class="comment">//	电脑分数</span></div><div class="line">		pcScore = [],</div><div class="line"><span class="comment">//		最优位置的分数</span></div><div class="line">		max = <span class="number">0</span>,</div><div class="line"><span class="comment">//		电脑预落子maxI列</span></div><div class="line">		maxI = <span class="number">0</span>,</div><div class="line"><span class="comment">//		电脑预落子maxJ行</span></div><div class="line">		maxJ =<span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">15</span>;i++) &#123;</div><div class="line">			myScore[i] = [];</div><div class="line">			pcScore[i] = [];</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>; j&lt;<span class="number">15</span>;j++) &#123;</div><div class="line">				myScore[i][j] = <span class="number">0</span>;</div><div class="line">				pcScore[i][j] = <span class="number">0</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"><span class="comment">//		对两个数组分别进行加分</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">15</span>;i++) &#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">15</span>;j++) &#123;</div><div class="line">				<span class="keyword">if</span>(hasChess[i][j] == <span class="number">0</span>) &#123;</div><div class="line">					<span class="keyword">for</span> (<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;count;k++)&#123;</div><div class="line">						<span class="keyword">if</span>(wins[i][j][k]) &#123;</div><div class="line">							<span class="keyword">switch</span>(myWin[k]) &#123;</div><div class="line">								<span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">								myScore[i][j] +=<span class="number">200</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">								myScore[i][j] +=<span class="number">400</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">								myScore[i][j] +=<span class="number">2000</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">								myScore[i][j] +=<span class="number">10000</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">default</span>:</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">							&#125;</div><div class="line">							<span class="keyword">switch</span>(pcWin[k]) &#123;</div><div class="line">								<span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">								pcScore[i][j] +=<span class="number">220</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">								pcScore[i][j] +=<span class="number">420</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">								pcScore[i][j] +=<span class="number">2220</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">								pcScore[i][j] +=<span class="number">20000</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">6</span>:</div><div class="line">								pcScore[i][j] = <span class="number">0</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">default</span>:</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line"><span class="comment">//					若玩家在(i,j)处的分数高于目前的最高分数,则落子在(i,j)处</span></div><div class="line">					<span class="keyword">if</span>(myScore[i][j] &gt; max) &#123;</div><div class="line">						max = myScore[i][j];</div><div class="line">						maxI = i;</div><div class="line">						maxJ = j;</div><div class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(myScore[i][j] == max&amp;&amp; pcScore[i][j] &gt; pcScore[maxI][maxJ])&#123;</div><div class="line"> <span class="comment">// 					如果玩家(i,j)处和目前最优分数一样大，则比较电脑在该位置和预落子的位置的分数</span></div><div class="line">							maxI = i;</div><div class="line">							maxJ = j;</div><div class="line">					&#125;</div><div class="line"><span class="comment">//					  如果电脑(i,j)处比目前最优的分数大，则落子在(i,j)处</span></div><div class="line">					<span class="keyword">if</span>(pcScore[i][j] &gt; max) &#123;</div><div class="line">						max = pcScore[i][j];</div><div class="line">						maxI = i;</div><div class="line">						maxJ = j;</div><div class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pcScore[i][j] == max &amp;&amp; myScore[i][j] &gt; myScore[maxI][maxJ])&#123;</div><div class="line"><span class="comment">//						如果电脑(i,j)处和目前最优分数一样大，则比较玩家在该位置和预落子的位置的分数</span></div><div class="line">							maxI = i;</div><div class="line">							maxJ = j;</div><div class="line"></div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">		&#125;</div><div class="line">		oneStep(maxI,maxJ,<span class="literal">false</span>);</div><div class="line">		hasChess[maxI][maxJ] = <span class="number">2</span>;</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> n=<span class="number">0</span> ; n&lt;count;n++) &#123;</div><div class="line">			<span class="keyword">if</span>(wins[maxI][maxJ][n]) &#123;</div><div class="line">				pcWin[n]++;</div><div class="line">				myWin[n] =<span class="number">6</span>;</div><div class="line">				<span class="keyword">if</span>(pcWin[n] == <span class="number">5</span>) &#123;</div><div class="line">					<span class="built_in">window</span>.alert(<span class="string">"你输了！"</span>);</div><div class="line">					over = <span class="literal">true</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>很复杂的代码。通过遍历坐标，确定包含这个坐标的赢法，然后对这个赢法进行权重加成，赢法内拥有越多的黑子，权重越大。同时，对自己下子的每个坐标所对应的的赢法也进行加权，并且电脑获胜是的权重是高于人的。（这里很难用自己的话描述出来）。<br><strong>以图为例：</strong></p>
+</blockquote>
+<p><img src="http://img.mukewang.com/58cbbc5900017d8012800720.jpg" alt="image"></p>
+<p>当黑子落点为坐标[0][0]时，此时应当是有三个方向上，即横、竖、45°，三个赢法数组存在。并且所对应的元素均为true。黑子落点后，上面代码中的第一次循环因为if(hasCheer[0][0])为false，跳过，三种赢法内空余的格子都进入循环，每种myWin[k]都是一，所以横、竖、45°线上其他空格的分数均为200，因此第一次循环获取到坐标i=0,j=之后，后面的因为都与它相等不会获得更高权重，所以AI会落子在0,1处。</p>
+<hr>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//canvas</span></div><div class="line"><span class="keyword">var</span> gobang = <span class="built_in">document</span>.getElementById(<span class="string">"gobang"</span>),</div><div class="line">	context = gobang.getContext(<span class="string">"2d"</span>),</div><div class="line">	background = <span class="keyword">new</span> Image();</div><div class="line">	background.src = <span class="string">"img/bg.png"</span>;</div><div class="line"></div><div class="line"></div><div class="line">context.strokeStyle =  <span class="string">"#000"</span>;</div><div class="line">background.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	context.drawImage(background,<span class="number">0</span>,<span class="number">0</span>,<span class="number">450</span>,<span class="number">450</span>);</div><div class="line">	<span class="function">(<span class="params">(</span>) =&gt;</span> &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> i= <span class="number">0</span>; i&lt;<span class="number">15</span> ; i++ ) &#123;</div><div class="line">			context.moveTo(<span class="number">15</span> + i*<span class="number">30</span>, <span class="number">15</span>);</div><div class="line">			context.lineTo(<span class="number">15</span> + i*<span class="number">30</span>, <span class="number">435</span>);</div><div class="line">			context.stroke();</div><div class="line">			context.moveTo(<span class="number">15</span>,<span class="number">15</span> + i*<span class="number">30</span>);</div><div class="line">			context.lineTo(<span class="number">435</span>,<span class="number">15</span>+ i*<span class="number">30</span>);</div><div class="line">			context.stroke();</div><div class="line">		&#125;			</div><div class="line">	&#125;)();</div><div class="line">&#125;</div><div class="line"><span class="comment">//落子</span></div><div class="line"><span class="keyword">var</span> hasChess = [],</div><div class="line">	me = <span class="literal">true</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">15</span>; i++) &#123;</div><div class="line">	hasChess[i] = [];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> j=<span class="number">0</span>; j&lt;<span class="number">15</span>;j++) &#123;</div><div class="line">		hasChess[i][j] = <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> oneStep = <span class="function"><span class="keyword">function</span> (<span class="params">i,j,me</span>) </span>&#123;</div><div class="line">	context.beginPath();</div><div class="line">	context.arc(<span class="number">15</span> + i*<span class="number">30</span>,<span class="number">15</span> + j*<span class="number">30</span>,<span class="number">13</span>,<span class="number">0</span>,<span class="number">2</span>*<span class="built_in">Math</span>.PI);</div><div class="line">	context.closePath();</div><div class="line">	<span class="keyword">let</span> gradient = context.createRadialGradient(<span class="number">15</span> + i*<span class="number">30</span>, <span class="number">15</span>+ j*<span class="number">30</span> <span class="number">-2</span>,<span class="number">50</span>,<span class="number">15</span> + i*<span class="number">30</span> +<span class="number">2</span>, <span class="number">15</span>+j * <span class="number">30</span> - <span class="number">2</span>,<span class="number">0</span>);</div><div class="line">	me ? <span class="function">(<span class="params">(</span>)=&gt;</span>&#123;gradient.addColorStop(<span class="number">0</span>,<span class="string">"#0a0a0a"</span>);gradient.addColorStop(<span class="number">1</span>,<span class="string">"#8e8e8e"</span> )&#125;)() : <span class="function">(<span class="params">(</span>)=&gt;</span>&#123;gradient.addColorStop(<span class="number">0</span>,<span class="string">"#8e8e8e"</span>);gradient.addColorStop(<span class="number">1</span>,<span class="string">"#fff"</span>)&#125;)();</div><div class="line">	context.fillStyle = gradient;</div><div class="line">	context.fill();</div><div class="line">	me = !me;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//赢法数组</span></div><div class="line"><span class="keyword">var</span> wins = [],</div><div class="line">	count = <span class="number">0</span>;</div><div class="line">	<span class="comment">//生产赢法数组</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">15</span> ; i ++) &#123;</div><div class="line">	wins[i] = [];</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j&lt;<span class="number">15</span>;j ++) &#123;</div><div class="line">		wins[i][j] = [];</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//所有竖排赢法</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">15</span>; i++) &#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">11</span>;j++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;<span class="number">5</span>;k++) &#123;</div><div class="line">			wins[i][j+k][count] = <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//所有横排赢法</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">15</span>;i++) &#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>;j&lt;<span class="number">11</span>;j ++) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;<span class="number">5</span>;k++) &#123;</div><div class="line">			wins[j+k][i][count] = <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//所有45°赢法</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">11</span>;i++) &#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">11</span>;j++) &#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;<span class="number">5</span>;k++) &#123;</div><div class="line">			wins[i+k][j+k][count] = <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//所有135°赢法</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">11</span>;i++) &#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">14</span>;j&gt;<span class="number">3</span>;j--) &#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;<span class="number">5</span>;k++) &#123;</div><div class="line">			wins[i+k][j-k][count] = <span class="literal">true</span>;</div><div class="line">		&#125;</div><div class="line">		count++;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//输赢判断</span></div><div class="line"><span class="keyword">var</span> myWin = [],</div><div class="line">	pcWin = [],</div><div class="line">	over = <span class="literal">false</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;count ;i++) &#123;</div><div class="line">	myWin[i] = <span class="number">0</span>;</div><div class="line">	pcWin[i] = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//AI实现</span></div><div class="line"><span class="keyword">var</span> pcAI = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">//玩家分数</span></div><div class="line">	<span class="keyword">let</span> myScore = [],</div><div class="line"><span class="comment">//	电脑分数</span></div><div class="line">		pcScore = [],</div><div class="line"><span class="comment">//		最优位置的分数</span></div><div class="line">		max = <span class="number">0</span>,</div><div class="line"><span class="comment">//		电脑预落子maxI列</span></div><div class="line">		maxI = <span class="number">0</span>,</div><div class="line"><span class="comment">//		电脑预落子maxJ行</span></div><div class="line">		maxJ =<span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">15</span>;i++) &#123;</div><div class="line">			myScore[i] = [];</div><div class="line">			pcScore[i] = [];</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>; j&lt;<span class="number">15</span>;j++) &#123;</div><div class="line">				myScore[i][j] = <span class="number">0</span>;</div><div class="line">				pcScore[i][j] = <span class="number">0</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"><span class="comment">//		对两个数组分别进行加分</span></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">15</span>;i++) &#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;<span class="number">15</span>;j++) &#123;</div><div class="line">				<span class="keyword">if</span>(hasChess[i][j] == <span class="number">0</span>) &#123;</div><div class="line">					<span class="keyword">for</span> (<span class="keyword">let</span> k=<span class="number">0</span>;k&lt;count;k++)&#123;</div><div class="line">						<span class="keyword">if</span>(wins[i][j][k]) &#123;</div><div class="line">							<span class="keyword">switch</span>(myWin[k]) &#123;</div><div class="line">								<span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">								myScore[i][j] +=<span class="number">200</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">								myScore[i][j] +=<span class="number">400</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">								myScore[i][j] +=<span class="number">2000</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">								myScore[i][j] +=<span class="number">10000</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">default</span>:</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">							&#125;</div><div class="line">							<span class="keyword">switch</span>(pcWin[k]) &#123;</div><div class="line">								<span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">								pcScore[i][j] +=<span class="number">220</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">								pcScore[i][j] +=<span class="number">420</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">								pcScore[i][j] +=<span class="number">2220</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">								pcScore[i][j] +=<span class="number">20000</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">case</span> <span class="number">6</span>:</div><div class="line">								pcScore[i][j] = <span class="number">0</span>;</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">								<span class="keyword">default</span>:</div><div class="line">								<span class="keyword">break</span>;</div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line"><span class="comment">//					若玩家在(i,j)处的分数高于目前的最高分数,则落子在(i,j)处</span></div><div class="line">					<span class="keyword">if</span>(myScore[i][j] &gt; max) &#123;</div><div class="line">						max = myScore[i][j];</div><div class="line">						maxI = i;</div><div class="line">						maxJ = j;</div><div class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(myScore[i][j] == max&amp;&amp; pcScore[i][j] &gt; pcScore[maxI][maxJ])&#123;</div><div class="line"> <span class="comment">// 					如果玩家(i,j)处和目前最优分数一样大，则比较电脑在该位置和预落子的位置的分数</span></div><div class="line">							maxI = i;</div><div class="line">							maxJ = j;</div><div class="line">					&#125;</div><div class="line"><span class="comment">//					  如果电脑(i,j)处比目前最优的分数大，则落子在(i,j)处</span></div><div class="line">					<span class="keyword">if</span>(pcScore[i][j] &gt; max) &#123;</div><div class="line">						max = pcScore[i][j];</div><div class="line">						maxI = i;</div><div class="line">						maxJ = j;</div><div class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pcScore[i][j] == max &amp;&amp; myScore[i][j] &gt; myScore[maxI][maxJ])&#123;</div><div class="line"><span class="comment">//						如果电脑(i,j)处和目前最优分数一样大，则比较玩家在该位置和预落子的位置的分数</span></div><div class="line">							maxI = i;</div><div class="line">							maxJ = j;</div><div class="line"></div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;;</div><div class="line">		&#125;</div><div class="line">		oneStep(maxI,maxJ,<span class="literal">false</span>);</div><div class="line">		hasChess[maxI][maxJ] = <span class="number">2</span>;</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (<span class="keyword">let</span> n=<span class="number">0</span> ; n&lt;count;n++) &#123;</div><div class="line">			<span class="keyword">if</span>(wins[maxI][maxJ][n]) &#123;</div><div class="line">				pcWin[n]++;</div><div class="line">				myWin[n] =<span class="number">6</span>;</div><div class="line">				<span class="keyword">if</span>(pcWin[n] == <span class="number">5</span>) &#123;</div><div class="line">					<span class="built_in">window</span>.alert(<span class="string">"你输了！"</span>);</div><div class="line">					over = <span class="literal">true</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div><div class="line">gobang.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (over) &#123;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (!me) &#123;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">let</span> x = e.offsetX,</div><div class="line">		y = e.offsetY,</div><div class="line">		i = <span class="built_in">Math</span>.floor(x/<span class="number">30</span>),</div><div class="line">		j = <span class="built_in">Math</span>.floor(y/<span class="number">30</span>);</div><div class="line">		<span class="keyword">if</span> (hasChess[i][j] == <span class="number">0</span> ) &#123;</div><div class="line">			oneStep(i,j,me);</div><div class="line">			hasChess[i][j] = <span class="number">1</span>;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">let</span> k=<span class="number">0</span>; k&lt;count;k++) &#123;</div><div class="line">				<span class="keyword">if</span>(wins[i][j][k]) &#123;</div><div class="line">					myWin[k]++;</div><div class="line">					pcWin[k] =<span class="number">6</span>;</div><div class="line">					<span class="keyword">if</span>(myWin[k] == <span class="number">5</span>) &#123;</div><div class="line">						<span class="built_in">window</span>.alert(<span class="string">"你赢了！"</span>);</div><div class="line">						over = <span class="literal">true</span>;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(!over) &#123;</div><div class="line">				pcAI();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+          
+            <a href="/tags/五子棋/" rel="tag"># 五子棋</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/27/ajax-note/" rel="prev" title="Ajax学习小记-概念">
+                Ajax学习小记-概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="gakkispy" />
+          <p class="site-author-name" itemprop="name">gakkispy</p>
+           
+              <p class="site-description motion-element" itemprop="description">前端|搞机|菜鸡</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gakkispy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://codepen.io/Sunplantlist/" target="_blank" title="CodePen">
+                  
+                    <i class="fa fa-fw fa-codepen"></i>
+                  
+                  CodePen
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2249052642" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建赢法数组"><span class="nav-number">1.</span> <span class="nav-text">创建赢法数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输赢判断"><span class="nav-number">2.</span> <span class="nav-text">输赢判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI实现"><span class="nav-number">3.</span> <span class="nav-text">AI实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">4.</span> <span class="nav-text">完整代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gakkispy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
