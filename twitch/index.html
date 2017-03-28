@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<title>Twitch</title>
+</head>
+<body>
+	<header class="topbar"><i class="top-logo"></i></header>
+	<section class="main container">
+		<div class="row">
+			<nav class="col-xs-10 col-xs-offset-1">
+				<ul class="nav nav-tabs nav-justified">
+				  <li role="presentation" class="active" id="online"><a href="#">Online</a></li>
+				  <li role="presentation" id="offline"><a href="#">Offline</a></li>
+				  <li role="presentation" id="all"><a href="#">All</a></li>
+				</ul>
+				<div class="search-wrap">
+					<span class="search-icon glyphicon glyphicon-search" aria-hidden="true"></span>
+					<input type="search" name="search" id="search" placeholder="User Name" />
+				</div>
+			</nav>
+			<div class="col-xs-10 col-xs-offset-1">
+				<div class="results row">
+					<div class="row">
+						<div class="col-xs-4 room">
+							<a href="#" id="fcc" target="_blank">
+								<div class="logo"></div>
+								<div class="viewers"></div>
+								<div class="name"></div>
+								<div class="despt"></div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript" src="js/main.js" ></script>
+</body>
+</html>

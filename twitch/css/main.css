@@ -1,0 +1,84 @@
+.topbar {
+	height: 60px;
+	background: url(../img/Twitch-Logo.png) no-repeat -110px 5px ;
+	background-size: 200px;
+	text-align: center;
+	padding-top: 5px;
+	box-shadow: 0 5px 5px #9D9D9D;
+	margin-bottom: 5px;
+}
+.top-logo {
+	display: inline-block;
+	height: 60px;
+	width: 50%;
+	background: url(../img/Twitch-Logo.png) no-repeat  50% -39px;
+	background-size: 140px;
+}
+#search {
+	width: 100%;
+	position: relative;
+	padding: 5px;
+	padding-left:22px ;
+}
+.search-icon {
+	height: 16px;
+	position: absolute;
+	top: 52px;
+	left: 20px;
+	bottom: 0;
+	z-index: 5;
+
+}
+
+@media screen and (max-width:786px) {
+	.search-icon {
+		top: 147px;
+	}
+}
+.room {
+	overflow: hidden;
+	margin-top: 40px;
+	padding: 15px;
+}
+.room a{
+	display: inline-block;
+	width: 100%;
+	text-decoration: none;
+	height: 250px;
+	border-radius:40px ;
+	border-bottom-left-radius: 5px;
+	border-top-right-radius: 5px;
+	color: #F7F7F7;
+	background: url(../img/33.jpg);
+	background-size: contain;
+	padding-left: 10px;
+	box-shadow: 0 0 10px #000;
+}
+.room img {
+	margin-left: -10px;
+	max-width: 80px;
+	max-height: 80px;
+	border:3px solid mediumvioletred;
+	border-radius: 40px;
+}
+ .room i {
+ 	padding: 5px;
+ }
+.room p {
+	display: inline-block;
+	overflow: hidden;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 90%;
+	margin-top: -20px;
+	margin-bottom: -5px;
+}
+.room h1 {
+	margin-top: 80px;
+	margin-bottom: 5px;
+}
+
+.offline {
+	display: none;
+}

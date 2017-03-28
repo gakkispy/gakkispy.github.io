@@ -1,0 +1,109 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: url("https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png") no-repeat 100px 100px;
+	background-color: #e8e8e8;
+	padding-bottom: 50px;
+	background-attachment: fixed;
+}
+h1,h3 {
+	font-family: 'Josefin Sans', sans-serif;
+	margin: 0;
+	color: #fb6440;
+}
+.main {
+	margin-top: 8em;
+	text-align: center;
+}
+
+#search-box {
+	display: block;
+	border: none;
+	border-bottom: 2px solid #000;
+	outline: none;
+	background: none;
+	width: 250px;
+	margin: 0 auto;
+	margin-bottom: 15px;
+	padding: 10px;
+	font-size: 1.3em;
+	color: #000;
+	text-align: center;
+}
+
+::-webkit-input-placeholder {
+	color: darkslategray;
+}
+
+input:focus::-webkit-input-placeholder {
+	color: transparent;
+	
+}
+
+.results {
+	text-align: left;
+	position: relative;
+}
+.result {
+	margin: 0 auto;
+	width: 50%;
+	
+	
+	margin-top: 5px;
+	background-color: #fff;
+	
+}
+
+.result a {
+	position: relative;
+	display: inline-block;
+	outline: none;
+	text-decoration: none;
+	color: #337ab7;
+	padding: 5px;
+}
+
+/* 大框 */
+
+/* 小框 */
+.result  a:hover::after {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	width: 100%;
+	height: 100%;
+	border: 2px solid lightseagreen;
+	transition: .6s;
+ }
+.result:hover{
+	transition: .6s;
+	transform: scale(1.05);
+	border-color:deepskyblue ;
+}
+
+
+.btn {
+	background: none;
+	border: none;
+	border: 2px solid darkslategrey;
+	outline: none;
+	padding: 10px;
+	font-size: 1.3em;
+	color: darkolivegreen;
+	cursor: pointer;
+	background-color: rgba(255,255,255,.6);
+}
+
+footer {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	background-color: #e8e8e8;
+	
+}

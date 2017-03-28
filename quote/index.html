@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+		<link rel="stylesheet" type="text/css" href="css/indexstyle.css"/>
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="index--meta">
+			<canvas id="c_n3" width="1069" height="900" style="position: fixed;top: 0px;left: 0px;z-index: -1;opacity: 0.5;"></canvas>
+			<script type="text/javascript" color="99,99,99" opacity="0.3" count= "199" src="//github.atool.org/canvas-nest.min.js"></script>
+			<!--[if lt IE 9]>
+			<div class="alert alert-danger topframe" role="alert">Oops,我想你的浏览器过于陈旧了，不如更换最新的浏览器怎么样！ <a target="_blank"
+			</div><![endif]-->
+		</div>
+		<header class="header">
+			<aside class="header__logo logo">
+
+			</aside>
+			<div class="header__main"></div>
+			<aside class="header__menu"></aside>
+		</header><!--顶栏结束-->
+		<section class="index--main">
+			<header class="indexMain__head">
+				<h2 class="slogan ">"<i class="quote-text"></i><span id="text"></span></h2>
+				<div class="quote-author">-<span id="author"></span></div>
+			</header>
+
+			<section class="indexMain__form">
+
+				<div class="form--wrapper">
+					<div  class="show">
+
+						<div class="button--wrapper">
+							<input  class="submit" type="button" value="随便点点"/>
+						</div>
+						<a id="weibo-quote" title="Weibo this quote" target="_blank" class="button--wrapper button--wrapper--sns"><i class="iconfont icon-weibo"></i><a>
+						<a id="tweet-quote" title="Tweet this quote" target="_blank" class="button--wrapper button--wrapper--sns"><i class="iconfont icon-twitter"></i><a>
+
+					</div><!--登陆表单结束-->
+				</div>
+				<p class="cleafix"></p>
+			</section><!--表单部分结束-->
+		</section>
+		<footer class="footer">
+				<ul class="footer__ul">
+					<li><span>@2017</span></li>
+					<li><a href="#">code for freecodecamp</a></li>
+				</ul>
+		</footer><!--底部结束-->
+		<script type="text/javascript">
+			$(window).ready(function() {
+				var change = $(".indexMain__nav>a");
+				change.click(function (e) {
+					if (!$(this).hasClass('active')){
+
+						$("form").toggle('slow');
+						change.toggleClass('active');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

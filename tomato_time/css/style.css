@@ -1,0 +1,348 @@
+* {
+	padding: 0;margin: 0;
+}
+
+i {
+	cursor: pointer;
+}
+
+ul {
+	list-style: none;
+}
+
+.hide {
+	display: none;
+}
+/*左栏*/
+.leftbar {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 45px;
+	background-color: #f2f2f2;
+}
+/*左栏元素排列*/
+
+.leftbar li {
+	display: block;
+	margin-left: 10px;
+	margin-top: 65px;
+	overflow: hidden;
+	height: 20px;
+}
+
+/*左栏文字超出显示区域达到隐藏效果*/
+.leftbar span {
+	display: inline-block;
+	margin-left: 20px;
+}
+/*进度条灰色背景*/
+.rate--wrap  {
+	height: 20px;
+	width: 100%;
+	border: 1px solid #e8e8e8;
+	background-color: #ccc;
+}
+
+
+/*进度条动画*/
+#rate {
+	width: 0;
+	height: 100%;
+	background: 
+		linear-gradient(to right,rgba(0,0,0,0) 88.5%,#2196f3 0),
+	    linear-gradient(to right,#f44336 80.77px,transparent 0),
+	    linear-gradient(to right,#2196f3 50px,transparent 0);
+	background-size: 420px 100%,97px 100%,42px 100%;
+	animation: 3s tomato linear 1 forwards normal;
+	animation-name: tomato;
+	animation-duration: 20s;
+	animation-play-state: paused;
+}
+/*偷懒就在css里设置了很多keyframes*/
+/*webkit*/
+@-webkit-keyframes tomato{
+	from{width: 0;}
+	to{width: 100%}
+}
+
+@-webkit-keyframes tomato_01{
+	from{width: 19.21%;}
+	to{width: 100%;}
+}
+
+@-webkit-keyframes tomato_02{
+	from{width: 23.06%;}
+	to{width: 100%;}
+}
+
+@-webkit-keyframes tomato_03{
+	from{width: 42.28%;}
+	to{width: 100%;}
+}
+
+@-webkit-keyframes tomato_04{
+	from{width: 46.12%;}
+	to{width: 100%;}
+}
+
+@-webkit-keyframes tomato_05{
+	from{width: 65.35%;}
+	to{width: 100%;}
+}
+
+@-webkit-keyframes tomato_06{
+	from{width: 69.20%;}
+	to{width: 100%;}
+}
+
+@-webkit-keyframes tomato_07{
+	from{width: 88.43%;}
+	to{width: 100%;}
+}
+
+/*mozila*/
+@-moz-keyframes tomato{
+	from{width: 0;}
+	to{width: 100%}
+}
+
+@-moz-keyframes tomato_01{
+	from{width: 19.21%;}
+	to{width: 100%;}
+}
+
+@-moz-keyframes tomato_02{
+	from{width: 23.06%;}
+	to{width: 100%;}
+}
+
+@-moz-keyframes tomato_03{
+	from{width: 42.28%;}
+	to{width: 100%;}
+}
+
+@-moz-keyframes tomato_04{
+	from{width: 46.12%;}
+	to{width: 100%;}
+}
+
+@-moz-keyframes tomato_05{
+	from{width: 65.35%;}
+	to{width: 100%;}
+}
+
+@-moz-keyframes tomato_06{
+	from{width: 69.20%;}
+	to{width: 100%;}
+}
+
+@-moz-keyframes tomato_07{
+	from{width: 88.43%;}
+	to{width: 100%;}
+}
+
+/*微软*/
+
+@-ms-keyframes tomato{
+	from{width: 0;}
+	to{width: 100%}
+}
+
+@-ms-keyframes tomato_01{
+	from{width: 19.21%;}
+	to{width: 100%;}
+}
+
+@-ms-keyframes tomato_02{
+	from{width: 23.06%;}
+	to{width: 100%;}
+}
+
+@-ms-keyframes tomato_03{
+	from{width: 42.28%;}
+	to{width: 100%;}
+}
+
+@-ms-keyframes tomato_04{
+	from{width: 46.12%;}
+	to{width: 100%;}
+}
+
+@-ms-keyframes tomato_05{
+	from{width: 65.35%;}
+	to{width: 100%;}
+}
+@-ms-keyframes tomato_06{
+	from{width: 69.20%;}
+	to{width: 100%;}
+}
+
+@-ms-keyframes tomato_07{
+	from{width: 88.43%;}
+	to{width: 100%;}
+}
+
+/*nomal*/
+
+@keyframes tomato{
+	from{width: 0;}
+	to{width: 100%}
+}
+
+@keyframes tomato_01{
+	from{width: 19.21%;}
+	to{width: 100%;}
+}
+
+@keyframes tomato_02{
+	from{width: 23.06%;}
+	to{width: 100%;}
+}
+
+@keyframes tomato_03{
+	from{width: 42.28%;}
+	to{width: 100%;}
+}
+
+@keyframes tomato_04{
+	from{width: 46.12%;}
+	to{width: 100%;}
+}
+
+@keyframes tomato_05{
+	from{width: 65.35%;}
+	to{width: 100%;}
+}
+@keyframes tomato_06{
+	from{width: 69.20%;}
+	to{width: 100%;}
+}
+
+@keyframes tomato_07{
+	from{width: 88.43%;}
+	to{width: 100%;}
+}
+/*通用包裹，然而只包裹了设置块，懒得改了ლ(╹◡╹ლ)*/
+.wrap {
+	width: 420px;
+	margin: 0 auto;
+	margin-top: 200px;
+}
+/*主体圆环*/
+.main {
+	margin: 0 auto;
+	margin-top: 40px;
+	height: 400px;
+	width: 400px;
+	border-radius: 100%;
+	border: 6px solid #808080;
+	text-align: center;
+	line-height: 400px;
+	font-size: 100px;
+	font-family: "courier new";
+}
+/*播放按钮*/
+.aside {
+	text-align: center;
+	margin-top: 40px;
+}
+
+/*不可触发元素设置*/
+
+.bg {
+	color: #808080;
+	position: absolute;
+	z-index: -1;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 4px;
+}
+
+
+.start--bg {
+	color: #E8E8E8;
+	top: 714px;
+}
+
+/*设置页面*/
+
+.setting h1{
+	text-align: center;
+}
+
+.select {
+	margin: 0 auto;
+	margin-top: 40px;
+	text-align: center;
+	/*z-index: 5;*/
+}
+
+/*选框包裹*/
+.select--group select{
+	display: inline-block;
+	margin-top: 10px;
+	padding: 4px;
+	padding-left: 10px;
+	font-size: 18px;
+	width: 200px;
+	height: 30px;
+}
+
+/*底栏*/
+.footbar {
+	position: fixed;
+	left: 0;
+	bottom: -45px;
+	height: 80px;
+	background-color: #e6e6e6;
+	width: 100%;
+	z-index: -1;
+	text-align: center;
+}
+/*底栏元素靠左*/
+.footbar ul {
+	/*position: relative;*/
+	margin-right: 25px;
+}
+/*底栏元素个体设置*/
+.footbar li{
+	position: relative;
+	text-align: center;
+	float: right;
+	margin-top: 10px;
+	display: inline-block;
+	width: 65px;
+	z-index: 1;
+}
+
+.footbar__text {
+	display: block;
+	margin-top: 11px;
+}
+
+.footbar #copyright {
+	position: absolute;
+	top: 10px;
+	
+}
+
+#copyright a {
+	color: #b71200;
+	text-decoration: none;
+}
+#copyright a:visited {
+	text-decoration: none;
+}
+
+/*cnavas*/
+#circle {
+	position: absolute;
+	top: 262px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 999;
+}
+
+

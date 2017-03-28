@@ -1,0 +1,17 @@
+canvas {
+	display: block;
+	margin: 200px auto;
+	box-shadow: 5px 5px 10px 5px #8e8e8e;
+
+}
+
+@media  screen and (max-width: 520px) {
+	canvas {
+		margin: 100px auto;
+	}
+}	
+header {
+	margin-top: -100px;
+	text-align: center;
+
+}
