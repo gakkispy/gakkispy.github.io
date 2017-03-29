@@ -1685,7 +1685,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #523261;
+  background: #6544ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2858,8 +2858,15 @@ body {
   display: none;
 }
 .site-brand-wrapper {
-  background: url("/images/headbg.png") no-repeat;
+  background: url("/images/headbg.png") no-repeat left bottom;
   background-size: 240px;
+}
+@media screen and (max-width: 1000px) {
+  .site-brand-wrapper {
+    background-attachment: fixed;
+    background-size: initial;
+    background-position-y: -350px;
+  }
 }
 .site-meta {
   background: rgba(120,102,96,0.5);

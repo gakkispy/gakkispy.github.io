@@ -1,0 +1,841 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法习题,reecodecamp," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Validate US Telephone Numbers如果传入字符串是一个有效的美国电话号码，则返回 true.
+用户可以在表单中填入一个任意有效美国电话号码. 下面是一些有效号码的例子(还有下面测试时用到的一些变体写法):">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FCC高级算法题">
+<meta property="og:url" content="http://yoursite.com/2017/03/29/fcc-senior/index.html">
+<meta property="og:site_name" content="红头发的韦斯莱">
+<meta property="og:description" content="Validate US Telephone Numbers如果传入字符串是一个有效的美国电话号码，则返回 true.
+用户可以在表单中填入一个任意有效美国电话号码. 下面是一些有效号码的例子(还有下面测试时用到的一些变体写法):">
+<meta property="og:updated_time" content="2017-03-29T09:00:26.980Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FCC高级算法题">
+<meta name="twitter:description" content="Validate US Telephone Numbers如果传入字符串是一个有效的美国电话号码，则返回 true.
+用户可以在表单中填入一个任意有效美国电话号码. 下面是一些有效号码的例子(还有下面测试时用到的一些变体写法):">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/29/fcc-senior/"/>
+
+
+
+
+
+  <title> FCC高级算法题 | 红头发的韦斯莱 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title" data-text="红头发的韦斯莱">红头发的韦斯莱</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-portfolio">
+          <a href="/portfolio" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br />
+            
+            不入流
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/fcc-senior/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="gakkispy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="红头发的韦斯莱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                FCC高级算法题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T16:12:46+08:00">
+                2017-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/习题集/" itemprop="url" rel="index">
+                    <span itemprop="name">习题集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Validate-US-Telephone-Numbers"><a href="#Validate-US-Telephone-Numbers" class="headerlink" title="Validate US Telephone Numbers"></a>Validate US Telephone Numbers</h2><p>如果传入字符串是一个有效的美国电话号码，则返回 true.</p>
+<p>用户可以在表单中填入一个任意有效美国电话号码. 下面是一些有效号码的例子(还有下面测试时用到的一些变体写法):<br><a id="more"></a><br>555-555-5555<br>(555)555-5555<br>(555) 555-5555<br>555 555 5555<br>5555555555<br>1 555 555 5555<br>在本节中你会看见如 800-692-7753 or 8oo-six427676;laskdjf这样的字符串. 你的任务就是验证前面给出的字符串是否是有效的美国电话号码. 区号是必须有的. 如果字符串中给出了国家代码, 你必须验证其是 1. 如果号码有效就返回 true ; 否则返回 false.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">telephoneCheck</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> reg=<span class="regexp">/^1? ?(\d&#123;3&#125;|\(\d&#123;3&#125;\))[ -]?\d&#123;3&#125;[ -]?\d&#123;4&#125;$/</span>;</div><div class="line">  <span class="keyword">var</span> res=reg.test(str);</div><div class="line">  <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Symmetric-Difference"><a href="#Symmetric-Difference" class="headerlink" title="Symmetric Difference"></a>Symmetric Difference</h2><p>创建一个函数，接受两个或多个数组，返回所给数组的 对等差分(symmetric difference) (△ or ⊕)数组.</p>
+<p>给出两个集合 (如集合 A = {1, 2, 3} 和集合 B = {2, 3, 4}), 而数学术语 “对等差分” 的集合就是指由所有只在两个集合其中之一的元素组成的集合(A △ B = C = {1, 4}). 对于传入的额外集合 (如 D = {2, 3}), 你应该安装前面原则求前两个集合的结果与新集合的对等差分集合 (C △ D = {1, 4} △ {2, 3} = {1, 2, 3, 4}).</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sym</span>(<span class="params">args</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> newArgs = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);<span class="comment">//转化数组</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">diff</span>(<span class="params">arr1,arr2</span>)</span>&#123;</div><div class="line">    <span class="comment">//闭包函数</span></div><div class="line">    arr1 = <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(arr1));</div><div class="line">    arr2 = <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(arr2));<span class="comment">//对参数进行去重</span></div><div class="line">    <span class="keyword">var</span> counter = arr2.length;</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;arr1.length;i++)&#123;</div><div class="line">      counter --;</div><div class="line">      arr2 = arr2.filter(<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> val !== arr1[i];</div><div class="line">      &#125;);<span class="comment">//遍历arr2，并返回arr2不与arr1重复的元素</span></div><div class="line">     <span class="keyword">if</span>(counter&lt;arr2.length)&#123;</div><div class="line">       arr2.push(arr1[i]);<span class="comment">//将arr1中不与arr2重复的元素添加进arr2中</span></div><div class="line">       counter = arr2.length;</div><div class="line">     &#125;<span class="keyword">else</span>&#123;</div><div class="line">       <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> arr2;</div><div class="line">  &#125;</div><div class="line"></div><div class="line"> <span class="keyword">for</span>(x = <span class="number">0</span>;x&lt;newArgs.length<span class="number">-1</span>;x++)&#123;</div><div class="line">   newArgs[x+<span class="number">1</span>] = diff(newArgs[x],newArgs[x+<span class="number">1</span>]);<span class="comment">//对newArgs数组进行遍历</span></div><div class="line"> &#125;</div><div class="line">  <span class="keyword">return</span> newArgs[newArgs.length<span class="number">-1</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">sym([<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>], [<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>]);</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Exact-Change"><a href="#Exact-Change" class="headerlink" title="Exact Change"></a>Exact Change</h2><p>设计一个收银程序 checkCashRegister() ，其把购买价格(price)作为第一个参数 , 付款金额 (cash)作为第二个参数, 和收银机中零钱 (cid) 作为第三个参数.</p>
+<p>cid 是一个二维数组，存着当前可用的找零.</p>
+<p>当收银机中的钱不够找零时返回字符串 “Insufficient Funds”. 如果正好则返回字符串 “Closed”.</p>
+<p>否则, 返回应找回的零钱列表,且由大到小存在二维数组中.</p>
+<p><em><a href="https://github.com/FreeCodeCamp/FreeCodeCamp/wiki/Algorithm-Exact-Change" target="_blank" rel="external">本题代码来自fcc的wiki</a></em></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> denom = [</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'ONE HUNDRED'</span>, <span class="attr">val</span>: <span class="number">100.00</span>&#125;,</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'TWENTY'</span>, <span class="attr">val</span>: <span class="number">20.00</span>&#125;,</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'TEN'</span>, <span class="attr">val</span>: <span class="number">10.00</span>&#125;,</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'FIVE'</span>, <span class="attr">val</span>: <span class="number">5.00</span>&#125;,</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'ONE'</span>, <span class="attr">val</span>: <span class="number">1.00</span>&#125;,</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'QUARTER'</span>, <span class="attr">val</span>: <span class="number">0.25</span>&#125;,</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'DIME'</span>, <span class="attr">val</span>: <span class="number">0.10</span>&#125;,</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'NICKEL'</span>, <span class="attr">val</span>: <span class="number">0.05</span>&#125;,</div><div class="line">  &#123; <span class="attr">name</span>: <span class="string">'PENNY'</span>, <span class="attr">val</span>: <span class="number">0.01</span>&#125;</div><div class="line">];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkCashRegister</span>(<span class="params">price, cash, cid</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> change = cash - price;</div><div class="line"><span class="comment">// 遍历cid数组获得一个带有目前零钱总数和各零钱数额的register对象</span></div><div class="line">  <span class="keyword">var</span> register = cid.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">acc, curr</span>) </span>&#123;</div><div class="line">    acc.total += curr[<span class="number">1</span>];</div><div class="line">    acc[curr[<span class="number">0</span>]] = curr[<span class="number">1</span>];</div><div class="line">    <span class="keyword">return</span> acc;</div><div class="line">  &#125;, &#123;<span class="attr">total</span>: <span class="number">0</span>&#125;);</div><div class="line"><span class="comment">//零钱正好找完</span></div><div class="line">  <span class="keyword">if</span> (register.total === change) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'Closed'</span>;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// 零钱不够了</span></div><div class="line">  <span class="keyword">if</span> (register.total &lt; change) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'Insufficient Funds'</span>;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// 遍历denom数组</span></div><div class="line">  <span class="keyword">var</span> change_arr = denom.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">acc, curr</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> value = <span class="number">0</span>;</div><div class="line">    <span class="comment">// while该面值零钱仍有余额</span></div><div class="line">    <span class="comment">// 面值应当小于或等于找零</span></div><div class="line">    <span class="keyword">while</span> (register[curr.name] &gt; <span class="number">0</span> &amp;&amp; change &gt;= curr.val) &#123;</div><div class="line">      change -= curr.val;</div><div class="line">      register[curr.name] -= curr.val;</div><div class="line">      value += curr.val;</div><div class="line"><span class="comment">// 消除浮点数误差</span></div><div class="line">      change = <span class="built_in">Math</span>.round(change * <span class="number">100</span>) / <span class="number">100</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (value &gt; <span class="number">0</span>) &#123;</div><div class="line">        acc.push([ curr.name, value ]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> acc;</div><div class="line">  &#125;, []); <span class="comment">// Initial value of empty array for reduce</span></div><div class="line"><span class="comment">// change_arr数组若没有元素或者无法找尽零钱，返回零钱不够了</span></div><div class="line">  <span class="keyword">if</span> (change_arr.length &lt; <span class="number">1</span> || change &gt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"Insufficient Funds"</span>;</div><div class="line">  &#125;</div><div class="line"><span class="comment">// Here is your change, ma'am.</span></div><div class="line">  <span class="keyword">return</span> change_arr;</div><div class="line">&#125;</div><div class="line"><span class="comment">// test here</span></div><div class="line">checkCashRegister(<span class="number">19.50</span>, <span class="number">20.00</span>, [[<span class="string">"PENNY"</span>, <span class="number">1.01</span>], [<span class="string">"NICKEL"</span>, <span class="number">2.05</span>], [<span class="string">"DIME"</span>, <span class="number">3.10</span>], [<span class="string">"QUARTER"</span>, <span class="number">4.25</span>], [<span class="string">"ONE"</span>, <span class="number">90.00</span>], [<span class="string">"FIVE"</span>, <span class="number">55.00</span>], [<span class="string">"TEN"</span>, <span class="number">20.00</span>], [<span class="string">"TWENTY"</span>, <span class="number">60.00</span>], [<span class="string">"ONE HUNDRED"</span>, <span class="number">100.00</span>]]);</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Inventory-Update"><a href="#Inventory-Update" class="headerlink" title="Inventory Update"></a>Inventory Update</h2><p>依照一个存着新进货物的二维数组，更新存着现有库存(在 arr1 中)的二维数组. 如果货物已存在则更新数量 . 如果没有对应货物则把其加入到数组中，更新最新的数量. 返回当前的库存数组，且按货物名称的字母顺序排列.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateInventory</span>(<span class="params">arr1, arr2</span>) </span>&#123;</div><div class="line">    arr1.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">v,ind,a</span>)</span>&#123;</div><div class="line">      <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;arr2.length;i++)&#123;</div><div class="line">        <span class="keyword">if</span>(arr2[i][<span class="number">1</span>] == v[<span class="number">1</span>])&#123;</div><div class="line">          v[<span class="number">0</span>] +=arr2[i][<span class="number">0</span>];</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;arr1.length;i++)&#123;</div><div class="line">    arr2 = arr2.filter(<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</div><div class="line">      <span class="keyword">return</span> val[<span class="number">1</span>] !== arr1[i][<span class="number">1</span>];</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">    <span class="keyword">var</span> newArr = arr1.concat(arr2);</div><div class="line">  newArr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> a[<span class="number">1</span>].charCodeAt(<span class="number">0</span>)-b[<span class="number">1</span>].charCodeAt(<span class="number">0</span>);</div><div class="line">  &#125;);</div><div class="line">  <span class="keyword">return</span> newArr;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Example inventory lists</span></div><div class="line">updateInventory([[<span class="number">21</span>, <span class="string">"Bowling Ball"</span>], [<span class="number">2</span>, <span class="string">"Dirty Sock"</span>], [<span class="number">1</span>, <span class="string">"Hair Pin"</span>], [<span class="number">5</span>, <span class="string">"Microphone"</span>]], [[<span class="number">2</span>, <span class="string">"Hair Pin"</span>], [<span class="number">3</span>, <span class="string">"Half-Eaten Apple"</span>], [<span class="number">67</span>, <span class="string">"Bowling Ball"</span>], [<span class="number">7</span>, <span class="string">"Toothpaste"</span>]]);</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="No-repeats-please"><a href="#No-repeats-please" class="headerlink" title="No repeats please"></a>No repeats please</h2><p>把一个字符串中的字符重新排列生成新的字符串，返回新生成的字符串里没有连续重复字符的字符串个数.连续重复只以单个字符为准</p>
+<p>例如, aab 应该返回 2 因为它总共有6中排列 (aab, aab, aba, aba, baa, baa), 但是只有两个 (aba and aba)没有连续重复的字符 (在本例中是 a).</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">permAlone</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> reg = <span class="regexp">/(.)\1+/g</span>;<span class="comment">//正则</span></div><div class="line">  <span class="keyword">var</span> newArr = str.split(<span class="string">''</span>);</div><div class="line">  <span class="keyword">var</span> r = [];</div><div class="line">  <span class="keyword">var</span> num = str.length;</div><div class="line">  (<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">t,a,n</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(n===<span class="number">0</span>)&#123;</div><div class="line">      <span class="keyword">return</span> r.push(t);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;a.length;i++)&#123;</div><div class="line">      f(t.concat(a[i]),a.slice(<span class="number">0</span>,i).concat(a.slice(i+<span class="number">1</span>)),n<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;)([],newArr,num);<span class="comment">//对数组进行全排列</span></div><div class="line">  <span class="keyword">var</span> res = r.map(<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> val.join(<span class="string">''</span>);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  res = res.filter(<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> !val.match(reg);</div><div class="line">  &#125;);<span class="comment">//匹配正则</span></div><div class="line">  <span class="keyword">return</span> res.length;</div><div class="line">&#125;</div><div class="line"></div><div class="line">permAlone(<span class="string">'aab'</span>);</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Friendly-Date-Ranges"><a href="#Friendly-Date-Ranges" class="headerlink" title="Friendly Date Ranges"></a>Friendly Date Ranges</h2><p>让日期区间更友好！</p>
+<p>把常见的日期格式如：YYYY-MM-DD 转换成一种更易读的格式。</p>
+<p>易读格式应该是用月份名称代替月份数字，用序数词代替数字来表示天 (1st 代替 1).</p>
+<p>记住不要显示那些可以被推测出来的信息: 如果一个日期区间里结束日期与开始日期相差小于一年，则结束日期就不用写年份了。月份开始和结束日期如果在同一个月，则结束日期月份就不用写了。</p>
+<p>另外, 如果开始日期年份是当前年份，且结束日期与开始日期小于一年，则开始日期的年份也不用写。</p>
+<p>例如:</p>
+<p>makeFriendlyDates([“2016-07-01”, “2016-07-04”]) 应该返回 [“July 1st”,”4th”]</p>
+<p>makeFriendlyDates([“2016-07-01”, “2018-07-04”]) 应该返回 [“July 1st, 2016”, “July 4th, 2018”].</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeFriendlyDates</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> Month = [<span class="string">""</span>, <span class="string">"January"</span>, <span class="string">"February"</span>, <span class="string">"March"</span>, <span class="string">"April"</span>, <span class="string">"May"</span>, <span class="string">"June"</span>,</div><div class="line">        <span class="string">"July"</span>, <span class="string">"August"</span>, <span class="string">"September"</span>, <span class="string">"October"</span>, <span class="string">"November"</span>, <span class="string">"December"</span></div><div class="line">      ],<span class="comment">//月份转换数组</span></div><div class="line">      result = [];</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">dateStr</span>) </span>&#123;</div><div class="line">    dateStr = <span class="built_in">parseInt</span>(dateStr,<span class="number">10</span>);</div><div class="line">    <span class="keyword">switch</span> (dateStr) &#123;</div><div class="line">      <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">        dateStr += <span class="string">'st'</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">        dateStr += <span class="string">'nd'</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">        dateStr += <span class="string">'rd'</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">default</span>:</div><div class="line">        dateStr += <span class="string">'th'</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dateStr;</div><div class="line">&#125;<span class="comment">//日期转换</span></div><div class="line">  <span class="keyword">var</span> date1 = test(arr[<span class="number">0</span>].substr(<span class="number">-2</span>)),</div><div class="line">      date2 = test(arr[<span class="number">1</span>].substr(<span class="number">-2</span>)),</div><div class="line">      arr1 = arr[<span class="number">0</span>].split(<span class="string">'-'</span>),</div><div class="line">      arr2 = arr[<span class="number">1</span>].split(<span class="string">'-'</span>),</div><div class="line">      year = arr2[<span class="number">0</span>]-arr1[<span class="number">0</span>],</div><div class="line">      month = arr2[<span class="number">1</span>]-arr1[<span class="number">1</span>],</div><div class="line">      date = arr2[<span class="number">2</span>]-arr1[<span class="number">2</span>],</div><div class="line">      month1 = arr[<span class="number">0</span>].substr(<span class="number">5</span>,<span class="number">2</span>),</div><div class="line">      month2 = arr[<span class="number">1</span>].substr(<span class="number">5</span>,<span class="number">2</span>),</div><div class="line">      year1 = arr[<span class="number">0</span>].substr(<span class="number">0</span>,<span class="number">4</span>),</div><div class="line">      year2 = arr[<span class="number">1</span>].substr(<span class="number">0</span>,<span class="number">4</span>);</div><div class="line">    <span class="keyword">switch</span>(year)&#123;</div><div class="line">      <span class="keyword">case</span> <span class="number">0</span>:</div><div class="line">        <span class="keyword">if</span>(month ==<span class="number">11</span> &amp;&amp; date == <span class="number">30</span>)&#123;</div><div class="line">          <span class="comment">//同年01-01和12-31</span></div><div class="line">          result.push(Month[<span class="built_in">parseInt</span>(month1,<span class="number">10</span>)]+<span class="string">' '</span>+date1+<span class="string">', '</span>+year1,Month[<span class="built_in">parseInt</span>(month2,<span class="number">10</span>)]+<span class="string">' '</span>+date2+<span class="string">', '</span>+year2);</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(month === <span class="number">0</span>)&#123;</div><div class="line">          <span class="keyword">if</span> (date !== <span class="number">0</span>)&#123;</div><div class="line">            <span class="comment">//同年同月不同日</span></div><div class="line">            result.push(Month[<span class="built_in">parseInt</span>(month1,<span class="number">10</span>)]+<span class="string">' '</span>+date1,date2);</div><div class="line">          &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="comment">//同年同月同日</span></div><div class="line">             result.push(Month[<span class="built_in">parseInt</span>(month1,<span class="number">10</span>)]+<span class="string">' '</span>+date1+<span class="string">', '</span>+year1);</div><div class="line">          &#125;</div><div class="line"></div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">          <span class="comment">//同年不同月</span></div><div class="line">          result.push(Month[<span class="built_in">parseInt</span>(month1,<span class="number">10</span>)]+<span class="string">' '</span>+date1+<span class="string">', '</span>+year1,Month[<span class="built_in">parseInt</span>(month2,<span class="number">10</span>)]+<span class="string">' '</span>+date2);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">        <span class="keyword">if</span>((month === <span class="number">0</span> &amp;&amp; date == <span class="number">-1</span>)||month &gt;<span class="number">0</span>)&#123;</div><div class="line">          <span class="comment">//差一年整</span></div><div class="line">          result.push(Month[<span class="built_in">parseInt</span>(month1,<span class="number">10</span>)]+<span class="string">' '</span>+date1+<span class="string">', '</span>+year1,Month[<span class="built_in">parseInt</span>(month2,<span class="number">10</span>)]+<span class="string">' '</span>+date2);</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(month === <span class="number">0</span> &amp;&amp; date &gt; <span class="number">-1</span>)&#123;</div><div class="line">          <span class="comment">//差一年同月，大于一年</span></div><div class="line">          result.push(Month[<span class="built_in">parseInt</span>(month1,<span class="number">10</span>)]+<span class="string">' '</span>+date1+<span class="string">', '</span>+year1,Month[<span class="built_in">parseInt</span>(month2,<span class="number">10</span>)]+<span class="string">' '</span>+date2+<span class="string">', '</span>+year2);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">          <span class="comment">//差一年，大于一年</span></div><div class="line">          result.push(Month[<span class="built_in">parseInt</span>(month1,<span class="number">10</span>)]+<span class="string">' '</span>+date1,Month[<span class="built_in">parseInt</span>(month2,<span class="number">10</span>)]+<span class="string">' '</span>+date2);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">default</span>:</div><div class="line">       result.push(Month[<span class="built_in">parseInt</span>(month1,<span class="number">10</span>)]+<span class="string">' '</span>+date1+<span class="string">', '</span>+year1,Month[<span class="built_in">parseInt</span>(month2,<span class="number">10</span>)]+<span class="string">' '</span>+date2+<span class="string">', '</span>+year2);</div><div class="line">&#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"></div><div class="line">makeFriendlyDates([<span class="string">"2018-01-01"</span>, <span class="string">"2018-12-31"</span>]);</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Make-a-Person"><a href="#Make-a-Person" class="headerlink" title="Make a Person"></a>Make a Person</h2><p>用下面给定的方法构造一个对象.</p>
+<p>方法有 getFirstName(), getLastName(), getFullName(), setFirstName(first), setLastName(last), and setFullName(firstAndLast).</p>
+<p>所有有参数的方法只接受一个字符串参数.</p>
+<p>所有的方法只与实体对象交互.</p>
+<p><strong>思路比较混乱，首先为了避免后面的代码影响到前面获取名字(get****Name)这几行代码，在更改时尽量将改变的数据存储到函数作用域内声明的变量中。</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params">firstAndLast</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> fullName = firstAndLast.split(<span class="string">' '</span>),firstName = fullName[<span class="number">0</span>],lastName = fullName[<span class="number">1</span>];</div><div class="line">  <span class="keyword">this</span>.getFirstName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> firstName;</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">this</span>.getLastName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> lastName;</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">this</span>.getFullName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> firstName+<span class="string">' '</span>+lastName;</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">this</span>.setFirstName = <span class="function"><span class="keyword">function</span>(<span class="params">first</span>)</span>&#123;</div><div class="line">     firstName = first;</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">this</span>.setLastName = <span class="function"><span class="keyword">function</span>(<span class="params">last</span>)</span>&#123;</div><div class="line">    lastName = last;</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">this</span>.setFullName = <span class="function"><span class="keyword">function</span>(<span class="params">firstAndLast</span>)</span>&#123;</div><div class="line">    firstName = firstAndLast.split(<span class="string">' '</span>)[<span class="number">0</span>];</div><div class="line">    lastName = firstAndLast.split(<span class="string">' '</span>)[<span class="number">1</span>];</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bob = <span class="keyword">new</span> Person(<span class="string">'Bob Ross'</span>);</div><div class="line"></div><div class="line">bob.getFullName();</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="Map-the-Debris"><a href="#Map-the-Debris" class="headerlink" title="Map the Debris"></a>Map the Debris</h2><p>返回一个数组，其内容是把原数组中对应元素的平均海拔转换成其对应的轨道周期.</p>
+<p>原数组中会包含格式化的对象内容，像这样 {name: ‘name’, avgAlt: avgAlt}.</p>
+<p>至于轨道周期怎么求，戳这里 on wikipedia (不想看英文的话可以自行搜索以轨道高度计算轨道周期的公式).</p>
+<p>求得的值应该是一个与其最接近的整数，轨道是以地球为基准的.</p>
+<p>地球半径是 6367.4447 kilometers, 地球的GM值是 398600.4418, 圆周率为Math.PI</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">orbitalPeriod</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> GM = <span class="number">398600.4418</span>;</div><div class="line">  <span class="keyword">var</span> earthRadius = <span class="number">6367.4447</span>,</div><div class="line">      altitude = [];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</div><div class="line">    arr[i].orbitalPeriod = <span class="built_in">Math</span>.round(<span class="number">2</span>*<span class="built_in">Math</span>.PI*<span class="built_in">Math</span>.sqrt(<span class="built_in">Math</span>.pow((earthRadius+arr[i].avgAlt),<span class="number">3</span>)/GM));</div><div class="line">    <span class="keyword">delete</span> arr[i].avgAlt;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">orbitalPeriod([&#123;<span class="attr">name</span> : <span class="string">"sputnik"</span>, <span class="attr">avgAlt</span> : <span class="number">35873.5553</span>&#125;]);</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Pairwise（找到你的另一半）"><a href="#Pairwise（找到你的另一半）" class="headerlink" title="Pairwise（找到你的另一半）"></a>Pairwise（找到你的另一半）</h2><p>都说优秀的程序员擅长面向对象编程，但却经常找不到另一半，这是为什么呢？因为你总是把自己局限成为一个程序员，没有打开自己的思维。</p>
+<p>这是一个社群的时代啊，在这里你应该找到与你有相同价值观但又互补的另一半。</p>
+<p>譬如：你编程能力强，估值11分，如果以20分为最佳情侣来计算，你应该找一个设计能力强，估值为9分的女生。</p>
+<p>那么当你遇到一个设计能力为9分的女生，千万别犹豫，大胆去表白。千万别以为后面的瓜比前面的甜哦。</p>
+<p>举个例子：有一个能力数组[7,9,11,13,15]，按照最佳组合值为20来计算，只有7+13和9+11两种组合。而7在数组的索引为0，13在数组的索引为3，9在数组的索引为1，11在数组的索引为2。</p>
+<p>所以我们说函数：pairwise([7,9,11,13,15],20) 的返回值应该是0+3+1+2的和，即6。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pairwise</span>(<span class="params">arr, arg</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> a = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">acc,curr,ind,array</span>)</span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=ind+<span class="number">1</span>;i&lt;array.length;i++)&#123;</div><div class="line">      <span class="keyword">if</span>(array[ind] + array[i] == arg)&#123;</div><div class="line">        array[ind] = array[i] = <span class="literal">NaN</span>;</div><div class="line">        <span class="keyword">return</span> acc+i+ind;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> acc;</div><div class="line">  &#125;,<span class="number">0</span>);</div><div class="line">  <span class="keyword">return</span> a;</div><div class="line">&#125;</div><div class="line"></div><div class="line">pairwise([<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>], <span class="number">4</span>);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法习题/" rel="tag"># 算法习题</a>
+          
+            <a href="/tags/reecodecamp/" rel="tag"># reecodecamp</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/29/fcc-mid/" rel="next" title="FCC中级算法题">
+                <i class="fa fa-chevron-left"></i> FCC中级算法题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="gakkispy" />
+          <p class="site-author-name" itemprop="name">gakkispy</p>
+           
+              <p class="site-description motion-element" itemprop="description">前端|搞机|菜鸡</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gakkispy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://codepen.io/Sunplantlist/" target="_blank" title="CodePen">
+                  
+                    <i class="fa fa-fw fa-codepen"></i>
+                  
+                  CodePen
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2249052642" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Validate-US-Telephone-Numbers"><span class="nav-number">1.</span> <span class="nav-text">Validate US Telephone Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symmetric-Difference"><span class="nav-number">2.</span> <span class="nav-text">Symmetric Difference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exact-Change"><span class="nav-number">3.</span> <span class="nav-text">Exact Change</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inventory-Update"><span class="nav-number">4.</span> <span class="nav-text">Inventory Update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#No-repeats-please"><span class="nav-number">5.</span> <span class="nav-text">No repeats please</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Friendly-Date-Ranges"><span class="nav-number">6.</span> <span class="nav-text">Friendly Date Ranges</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make-a-Person"><span class="nav-number">7.</span> <span class="nav-text">Make a Person</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-the-Debris"><span class="nav-number">8.</span> <span class="nav-text">Map the Debris</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pairwise（找到你的另一半）"><span class="nav-number">9.</span> <span class="nav-text">Pairwise（找到你的另一半）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gakkispy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
