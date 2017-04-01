@@ -12,7 +12,7 @@
     <entry>
       <title><![CDATA[React组件基础]]></title>
       <url>%2F2017%2F03%2F30%2Freact-components%2F</url>
-      <content type="text"><![CDATA[React虚拟DOM概念 React 组件 组件是React的一个主要特性 组件对于模块化开发的重要性 组件的return函数里返回的HTML节点必须是一个 可以给外部使用的组件定义, ex： export default class ComponentHeader extends. 入口的定义，ex：ReactDOM.render(,document.getElementById(&#39;example&#39;)); React多组件的嵌套 组件也可以通过参数的形式传递 项目命名的规范与文件的结构化 JSX内置表达式 ex: {window.userName == &quot;? &#39;default username&#39;:&#39;userName&#39; + userName&quot;} {/注释/} HTML转义字符要显示需要进行Unicode转码 转义字符还可以通过dangerouslySetInnerHTML,缺点是容易受到xss攻击。 生命周期 流程图]]></content>
+      <content type="text"><![CDATA[React 虚拟 DOM 概念 React 组件 组件是 React 的一个主要特性 组件对于模块化开发的重要性 组件的 return 函数里返回的HTML节点必须是一个 可以给外部使用的组件定义, ex： export default class ComponentHeader extends. 入口的定义，ex：ReactDOM.render(,document.getElementById(&#39;example&#39;)); React 多组件的嵌套 组件也可以通过参数的形式传递 项目命名的规范与文件的结构化 JSX 内置表达式 ex: {window.userName == &quot;? &#39;default username&#39;:&#39;userName&#39; + userName&quot;} {/注释/} HTML 转义字符要显示需要进行Unicode转码 转义字符还可以通过 dangerouslySetInnerHTML ,缺点是容易受到 xss 攻击。 生命周期 流程图]]></content>
     </entry>
 
     
