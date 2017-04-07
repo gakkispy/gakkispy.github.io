@@ -1,0 +1,831 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React,ES6," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="写 React 组件的时候，应该使用 React.createClass 语法还是 ES6 的 class 语法？或两者都不？这篇文章解释了两者之间的一些差异，希望能帮你做决定。
+用 ES5 或 ES6 都可以完美地写 React 组件。
+使用 JSX 意味着你已经需要一个「构建」步骤，也就是 Babel 将 JSX 转译(transpile)为 React.createElement 调用。很多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React&nbsp;组件构造方法:&nbsp;ES5&nbsp;(createClass)&nbsp;还是&nbsp;ES6&nbsp;(class)？">
+<meta property="og:url" content="https://gakkispy.github.io/2017/04/07/react-es5-or-es6/index.html">
+<meta property="og:site_name" content="红头发的韦斯莱">
+<meta property="og:description" content="写 React 组件的时候，应该使用 React.createClass 语法还是 ES6 的 class 语法？或两者都不？这篇文章解释了两者之间的一些差异，希望能帮你做决定。
+用 ES5 或 ES6 都可以完美地写 React 组件。
+使用 JSX 意味着你已经需要一个「构建」步骤，也就是 Babel 将 JSX 转译(transpile)为 React.createElement 调用。很多">
+<meta property="og:updated_time" content="2017-04-07T14:35:24.985Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React&nbsp;组件构造方法:&nbsp;ES5&nbsp;(createClass)&nbsp;还是&nbsp;ES6&nbsp;(class)？">
+<meta name="twitter:description" content="写 React 组件的时候，应该使用 React.createClass 语法还是 ES6 的 class 语法？或两者都不？这篇文章解释了两者之间的一些差异，希望能帮你做决定。
+用 ES5 或 ES6 都可以完美地写 React 组件。
+使用 JSX 意味着你已经需要一个「构建」步骤，也就是 Babel 将 JSX 转译(transpile)为 React.createElement 调用。很多">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://gakkispy.github.io/2017/04/07/react-es5-or-es6/"/>
+
+
+
+
+
+  <title> React&nbsp;组件构造方法:&nbsp;ES5&nbsp;(createClass)&nbsp;还是&nbsp;ES6&nbsp;(class)？ | 红头发的韦斯莱 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title" data-text="红头发的韦斯莱">红头发的韦斯莱</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-portfolio">
+          <a href="/portfolio" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br />
+            
+            不入流
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://gakkispy.github.io/2017/04/07/react-es5-or-es6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="gakkispy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="红头发的韦斯莱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React&nbsp;组件构造方法:&nbsp;ES5&nbsp;(createClass)&nbsp;还是&nbsp;ES6&nbsp;(class)？
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T21:56:06+08:00">
+                2017-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/分享/" itemprop="url" rel="index">
+                    <span itemprop="name">分享</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写 React 组件的时候，应该使用 <code>React.createClass</code> 语法还是 ES6 的 <code>class</code> 语法？<br>或两者都不？这篇文章解释了两者之间的一些差异，希望能帮你做决定。</p>
+<p>用 ES5 或 ES6 都可以完美地写 React 组件。</p>
+<p>使用 JSX 意味着你已经需要一个「构建」步骤，也就是 Babel 将 JSX 转译(transpile)为<br> <code>React.createElement</code> 调用。很多人充分利用这点， 仅仅向 Babel 的转译列表中添加一项<br>  <code>es2015</code>，就可以自由使用 ES6 的全部特性。</p>
+<p>如果你在使用类似 <a href="https://github.com/satya164/quik" target="_blank" rel="external">Quik</a> 或<br><a href="https://github.com/insin/react-heatpack" target="_blank" rel="external">React Heatpack</a> 的工具，<br>ES6 就已经为你配置好了。(如果你还没配置过环境可以读一下<a href="https://daveceddia.com/test-drive-react/" target="_blank" rel="external">quick start React</a>(英文))<br><a id="more"></a></p>
+<h2 id="比较：createClass-vs-class"><a href="#比较：createClass-vs-class" class="headerlink" title="比较：createClass vs class"></a>比较：createClass vs class</h2><p>下面是同一个组件分别使用 <code>React.createClass</code> 和 ES6 <code>class</code> 的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> InputControlES5 = React.createClass(&#123;</div><div class="line">    <span class="attr">propTypes</span>: &#123;</div><div class="line">        <span class="attr">initialValue</span>: React.PropTypes.string</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">defaultProps</span>: &#123;</div><div class="line">        <span class="attr">initialValue</span>: <span class="string">''</span></div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 设置 initial state</span></div><div class="line">    getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">text</span>: <span class="keyword">this</span>.props.initialValue || <span class="string">'placeholder'</span></div><div class="line">        &#125;;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">handleChange</span>: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.setState(&#123;</div><div class="line">            <span class="attr">text</span>: event.target.value</div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;div&gt;</div><div class="line">                Type something:</div><div class="line">                &lt;input onChange=&#123;this.handleChange&#125; value=&#123;this.state.text&#125; /&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line">class InputControlES6 extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line"></div><div class="line">        // 设置 initial state</div><div class="line">        this.state = &#123;</div><div class="line">            text: props.initialValue || 'placeholder'</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        // ES6 类中函数必须手动绑定</div><div class="line">        this.handleChange = this.handleChange.bind(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    handleChange(event) &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            text: event.target.value</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                Type something:</div><div class="line">                &lt;input onChange=&#123;this.handleChange&#125;</div><div class="line">               value=&#123;this.state.text&#125; /&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">InputControlES6.propTypes = &#123;</div><div class="line">    initialValue: React.PropTypes.string</div><div class="line">&#125;;</div><div class="line">InputControlES6.defaultProps = &#123;</div><div class="line">    initialValue: ''</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>以下是几点关键区别：</p>
+<h3 id="函数绑定"><a href="#函数绑定" class="headerlink" title="函数绑定"></a>函数绑定</h3><p>这可能是最容易犯错的点(tripping point)。</p>
+<p>用 <code>createClass</code> 很简单：每一个成员函数都由 React 自动绑定。任何时候需要调用，直接使用 <code>this.whateverFn</code> 即可，函数中的 <code>this</code> 变量在函数调用时会被正确设置。</p>
+<p>用 ES6 <code>class</code> 需要当心：函数不是自动绑定的。你必须手动绑定。最好是在构造函数中做这事，就像上面的例子那样。</p>
+<p>如果你不想总是手动敲这些函数绑定的代码，可以看看 <a href="https://www.npmjs.com/package/react-autobind" target="_blank" rel="external">react-autobind</a> 或 <a href="https://www.npmjs.com/package/autobind-decorator" target="_blank" rel="external">autobing-decorator</a>。</p>
+<p>另一个方法是行内绑定，像下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 使用 `.bind`:</div><div class="line">render() &#123;</div><div class="line">    return (</div><div class="line">        &lt;input onChange=&#123;this.handleChange.bind(this)&#125;</div><div class="line">           value=&#123;this.state.text&#125; /&gt;</div><div class="line">    );</div><div class="line">&#125;</div><div class="line"></div><div class="line">// --- 或 ---</div><div class="line"></div><div class="line">// 使用胖箭头函数:</div><div class="line">render() &#123;</div><div class="line">    return (</div><div class="line">        &lt;input onChange=&#123;() =&gt; this.handleChange()&#125;</div><div class="line">           value=&#123;this.state.text&#125; /&gt;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上任何一种方法都行的通，但都不如前文的方法有效率。因为每次<code>render</code> 方法被调用的时候（这个调用会相当频繁）就会有一个新的函数被创建。相比于在构造函数中做仅仅一次函数绑定，这个方法会慢一些。</p>
+<p>还有一个最终选项是将函数自身替换为胖箭头函数，像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通常的做法</span></div><div class="line"><span class="comment">// 需要在别处绑定</span></div><div class="line">handleChange(event) &#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;</div><div class="line">        <span class="attr">text</span>: event.target.value</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// ES7 做法</span></div><div class="line"><span class="comment">// 搞定，不需要另外绑定</span></div><div class="line">handleChange = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">this</span>.setState(&#123;</div><div class="line">        <span class="attr">text</span>: event.target.value</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用这个方法，你不需要做任何绑定。胖箭头函数的魔法会帮你全部搞定。函数内部的 <code>this</code> 变量会像预期的那样指向组件实例。</p>
+<p>唯一的警告是，胖箭头函数是一个「实验性」的特性，也就是说并不在官方的 ES6 标准中。但是它受 Babel 支持，只要启用“stage-0” 预置(preset)即可。如果你喜欢胖箭头语法（读作「令 handleChange 为一个以事件为参数的胖箭头函数），试试看。</p>
+<h3 id="构造函数是否调用-super-方法"><a href="#构造函数是否调用-super-方法" class="headerlink" title="构造函数是否调用 super 方法"></a>构造函数是否调用 super 方法</h3><p>ES6 类构造器需要接受 <code>props</code> 作为参数并调用 <code>super(call)</code>。<code>createClass</code> 并不需要这步，相比之下多了点例行公事(boilerplate)。</p>
+<h3 id="class-vs-createClass"><a href="#class-vs-createClass" class="headerlink" title="class vs createClass"></a>class vs createClass</h3><p>这一点显而易见。后者以一个对象为参数调用 <code>React.createClass</code> 方法，前者使用 <code>class</code> 扩展 <code>React.Component</code> 类。</p>
+<p><strong>专家提示</strong>: 如果你在一个文件中有多个组件，可以直接引入 <code>Component</code> 少打些字：<code>import React, {Component} form &#39;react&#39;</code></p>
+<h3 id="Initial-State-配置"><a href="#Initial-State-配置" class="headerlink" title="Initial State 配置"></a>Initial State 配置</h3><p><code>createClass</code> 方法接受一个 <code>getInitialState</code> (译者注：原文误作 <code>initialState</code>）函数作为参数一部分，这个函数会在组件挂载（mount）时被调用一次。</p>
+<p>ES6 <code>class</code> 使用构造函数。在调用 <code>super</code> 之后，直接设置 <code>state</code> 即可。</p>
+<h3 id="propTypes-和-defaultProps-的位置"><a href="#propTypes-和-defaultProps-的位置" class="headerlink" title="propTypes 和 defaultProps 的位置"></a>propTypes 和 defaultProps 的位置</h3><p>使用 <code>createClass</code> 的时候，将 <code>propTypes</code> 和 <code>defaultProps</code> 作为你传入的对象的属性。</p>
+<p>使用 ES6 <code>class</code> 的时候，这些变成了类本身的属性，所以他们需要在类定义完之后被加到类上。</p>
+<p>如果你开启了 ES7 的属性初始化器(property initializer)，可以使用下面的简写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Person extends React.Component &#123;</div><div class="line">    static propTypes = &#123;</div><div class="line">        name: React.PropTypes.string,</div><div class="line">        age: React.PropTypes.string</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    static defaultProps = &#123;</div><div class="line">        name: &apos;&apos;,</div><div class="line">        age: -1</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="忍者第三选项"><a href="#忍者第三选项" class="headerlink" title="忍者第三选项"></a>忍者第三选项</h2><p>除了 <code>createClass</code> 和 <code>class</code> 外， React 还支持所谓的「无状态(stateless)函数组件」。本质上它就是一个函数，没有 <code>state</code>，并且不能使用任何诸如 <code>componentWillMount</code> 或 <code>shouldComponentUpdate</code> 的生命周期方法。对于接受某些 props 并直接基于这些 props 渲染的简单组件来说，无状态函数组件非常合适。下面是一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function Person(&#123;firstName, lastName&#125;) &#123;</div><div class="line">    return (</div><div class="line">        &lt;span&gt;&#123;lastName&#125;, &#123;firstName&#125;&lt;/span&gt;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里用到了 ES6 的解构赋值特性来分离传入的 props，也可以写成下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person(props) &#123;</div><div class="line">    var firstName = props.firstName;</div><div class="line">    var lastName = props.lastName;</div><div class="line">    return (</div><div class="line">        &lt;span&gt;&#123;lastName&#125;, &#123;firstName&#125;&lt;/span&gt;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="该用哪一个才对？"><a href="#该用哪一个才对？" class="headerlink" title="该用哪一个才对？"></a>该用哪一个才对？</h2><p>Facebook <a href="https://facebook.github.io/react/blog/2015/03/10/react-v0.13.html" target="_blank" rel="external">已经声明</a> React.createClass 最终会被 ES6 class 取代，不过他们也说「我们不会废弃 React.createClass，直到我们找到目前 mixin 用例的替代方案，并且在语言中支持类属性初始化器」。</p>
+<p>只要有可能，尽量使用无状态函数组件。他们很简单，也会迫使你保持 UI 组件简单。</p>
+<p>对于需要 state、生命周期方法、或（通过 refs）访问底层 DOM 节点的复杂组件，使用 class。</p>
+<p>不过了解全部三种风格总是有好处的。当你在 StackOverflow 或别的地方查问题的时候，你可能会看到 ES5 和 ES6 两种风格的答案。ES6 风格正在积聚人气，但并不是唯一的风格。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>可以使用多种方式写 React 组件，我希望这篇概述能帮助你理清这方面的一些困惑。</p>
+<blockquote>
+<p> 转自: <a href="https://www.w3cplus.com/react/react-es5-createclass-vs-es6-classes.html" target="_blank" rel="external">https://www.w3cplus.com/react/react-es5-createclass-vs-es6-classes.html</a> © w3cplus.com<br><br>译者：<a href="http://www.w3cplus.com/blogs/u9lyfish" target="_blank" rel="external">@u9lyfish</a><br><br> 原文链接:<a href="https://daveceddia.com/react-es5-createclass-vs-es6-classes/" target="_blank" rel="external">https://daveceddia.com/react-es5-createclass-vs-es6-classes/</a><br><br>作者：<a href="https://daveceddia.com/about/" target="_blank" rel="external">@DAVE CEDDIA</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/02/intel-amd/" rel="next" title="【转】1800X不如7350K？牙膏厂疯狂公关">
+                <i class="fa fa-chevron-left"></i> 【转】1800X不如7350K？牙膏厂疯狂公关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="gakkispy" />
+          <p class="site-author-name" itemprop="name">gakkispy</p>
+           
+              <p class="site-description motion-element" itemprop="description">前端|搞机|菜鸡</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gakkispy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://codepen.io/Sunplantlist/" target="_blank" title="CodePen">
+                  
+                    <i class="fa fa-fw fa-codepen"></i>
+                  
+                  CodePen
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2249052642" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#比较：createClass-vs-class"><span class="nav-number">1.</span> <span class="nav-text">比较：createClass vs class</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数绑定"><span class="nav-number">1.1.</span> <span class="nav-text">函数绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数是否调用-super-方法"><span class="nav-number">1.2.</span> <span class="nav-text">构造函数是否调用 super 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-vs-createClass"><span class="nav-number">1.3.</span> <span class="nav-text">class vs createClass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Initial-State-配置"><span class="nav-number">1.4.</span> <span class="nav-text">Initial State 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#propTypes-和-defaultProps-的位置"><span class="nav-number">1.5.</span> <span class="nav-text">propTypes 和 defaultProps 的位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忍者第三选项"><span class="nav-number">2.</span> <span class="nav-text">忍者第三选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#该用哪一个才对？"><span class="nav-number">3.</span> <span class="nav-text">该用哪一个才对？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gakkispy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
