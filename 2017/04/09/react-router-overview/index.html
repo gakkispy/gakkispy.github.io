@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Ajax,慕课网," />
+  <meta name="keywords" content="慕课网,React,React Router," />
 
 
 
@@ -87,42 +87,16 @@
 
 
 
-<meta name="description" content="异步通过 XMLHttpRequest 函数来实现客户端和服务器端的异步处理
-具体实现：
-运用HTML和CSS来实现页面，表达信息；
-运用XMLHttpRequest和Web服务器进行数据的异步交换；
-运用JavaScript操作DOM，实现动态局部刷新；
-
-
-XMLHttpREquest对象
-不兼容IE6123456var request;if (window.XMLHttpRequest) &amp;">
+<meta name="description" content="React Router的一些概念">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ajax学习小记-概念">
-<meta property="og:url" content="https://gakkispy.github.io/2017/03/27/ajax-note/index.html">
+<meta property="og:title" content="React Router 概览">
+<meta property="og:url" content="https://gakkispy.github.io/2017/04/09/react-router-overview/index.html">
 <meta property="og:site_name" content="红头发的韦斯莱">
-<meta property="og:description" content="异步通过 XMLHttpRequest 函数来实现客户端和服务器端的异步处理
-具体实现：
-运用HTML和CSS来实现页面，表达信息；
-运用XMLHttpRequest和Web服务器进行数据的异步交换；
-运用JavaScript操作DOM，实现动态局部刷新；
-
-
-XMLHttpREquest对象
-不兼容IE6123456var request;if (window.XMLHttpRequest) &amp;">
-<meta property="og:image" content="http://img.mukewang.com/58b2f3800001d7d812800720.jpg">
-<meta property="og:updated_time" content="2017-03-27T14:40:08.198Z">
+<meta property="og:description" content="React Router的一些概念">
+<meta property="og:updated_time" content="2017-04-09T15:15:43.510Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ajax学习小记-概念">
-<meta name="twitter:description" content="异步通过 XMLHttpRequest 函数来实现客户端和服务器端的异步处理
-具体实现：
-运用HTML和CSS来实现页面，表达信息；
-运用XMLHttpRequest和Web服务器进行数据的异步交换；
-运用JavaScript操作DOM，实现动态局部刷新；
-
-
-XMLHttpREquest对象
-不兼容IE6123456var request;if (window.XMLHttpRequest) &amp;">
-<meta name="twitter:image" content="http://img.mukewang.com/58b2f3800001d7d812800720.jpg">
+<meta name="twitter:title" content="React Router 概览">
+<meta name="twitter:description" content="React Router的一些概念">
 
 
 
@@ -150,13 +124,13 @@ XMLHttpREquest对象
 
 
 
-  <link rel="canonical" href="https://gakkispy.github.io/2017/03/27/ajax-note/"/>
+  <link rel="canonical" href="https://gakkispy.github.io/2017/04/09/react-router-overview/"/>
 
 
 
 
 
-  <title> Ajax学习小记-概念 | 红头发的韦斯莱 </title>
+  <title> React Router 概览 | 红头发的韦斯莱 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -295,7 +269,7 @@ XMLHttpREquest对象
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://gakkispy.github.io/2017/03/27/ajax-note/">
+    <link itemprop="mainEntityOfPage" href="https://gakkispy.github.io/2017/04/09/react-router-overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="gakkispy">
@@ -316,7 +290,7 @@ XMLHttpREquest对象
             
             
               
-                Ajax学习小记-概念
+                React Router 概览
               
             
           </h1>
@@ -331,8 +305,8 @@ XMLHttpREquest对象
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T22:07:33+08:00">
-                2017-03-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T22:47:57+08:00">
+                2017-04-09
               </time>
             
 
@@ -394,96 +368,24 @@ XMLHttpREquest对象
       
 
       
-        <h2 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h2><p>通过 <strong>XMLHttpRequest</strong> 函数来实现客户端和服务器端的异步处理</p>
-<h4 id="具体实现："><a href="#具体实现：" class="headerlink" title="具体实现："></a>具体实现：</h4><ul>
-<li>运用HTML和CSS来实现页面，表达信息；</li>
-<li>运用XMLHttpRequest和Web服务器进行数据的异步交换；</li>
-<li>运用JavaScript操作DOM，实现动态局部刷新；</li>
-</ul>
-<hr>
-<h2 id="XMLHttpREquest对象"><a href="#XMLHttpREquest对象" class="headerlink" title="XMLHttpREquest对象"></a>XMLHttpREquest对象</h2><ul>
-<li>不兼容IE6<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> request;</div><div class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123;</div><div class="line">    request = <span class="keyword">new</span> XMLHttprequest();<span class="comment">//IE7+,chrome,ff,safari.</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    request = <span class="keyword">new</span> ActiveXobject(<span class="string">'Microsoft.XmlHTTP'</span>);??</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<a id="more"></a>
-<h2 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h2><h4 id="HTTP请求过程"><a href="#HTTP请求过程" class="headerlink" title="HTTP请求过程"></a>HTTP请求过程</h4><ol>
-<li>建立TCP连接</li>
-<li>Web浏览器向Web服务器发送请求命令</li>
-<li>Web浏览器发送请求头信息</li>
-<li>Web服务器应答</li>
-<li>Web服务器发送应答头信息</li>
-<li>Web服务器向浏览器发送数据</li>
-<li>Web服务器关闭TCP连接</li>
-</ol>
-<hr>
-<h4 id="HTTP组成部分"><a href="#HTTP组成部分" class="headerlink" title="HTTP组成部分"></a>HTTP组成部分</h4><ol>
-<li>HTTP请求的方法或动作，比如是GET还是POST请求</li>
-<li>正在请求的URL</li>
-<li>请求头（如客户端环境信息，身份验证信息）</li>
-<li>请求体，也就是请求 正文，请求好着呢个文中可以包含客户提交的 查询字符串信息，表单信息等等。</li>
-</ol>
-<hr>
-<h4 id="重点概念"><a href="#重点概念" class="headerlink" title="重点概念"></a>重点概念</h4><ul>
-<li>GET：<ol>
-<li>一般用信息获取            </li>
-<li>使用URL传递参数</li>
-<li>对所发送信息的数量也有</li>
-</ol>
-</li>
-<li><p>POST：</p>
-<ol>
-<li>一半用于修改服务器上的资源</li>
-<li>对所发送的信息数量无限制</li>
-</ol>
-</li>
-<li><p>响应组成：</p>
-<ol>
-<li>数字文字的状态码，显示请求的成功和失败</li>
-<li>响应头</li>
-<li>响应体</li>
-</ol>
-</li>
-<li><p>HTTP状态码</p>
-<ol>
-<li>1XX：信息类，表示收到浏览器请求，正在处理</li>
-<li>2XX: 成功，正确接受</li>
-<li>3XX：重定向，请求失败</li>
-<li>4XX：客户端错误，如 404 NOT</li>
-<li>5XX：服务器错误，如 500</li>
+        <h2 id="React-Router的一些概念"><a href="#React-Router的一些概念" class="headerlink" title="React Router的一些概念"></a>React Router的一些概念<a id="more"></a></h2><ul>
+<li>React Router为React提供了路由功能的支援。</li>
+<li><a href="https://github.com/ReactTraining/react-router
+底" target="_blank" rel="external">官方文档</a>。</li>
+<li>底层机制<ol>
+<li>React: state/props -&gt; Components -&gt; UI</li>
+<li>Router: location -&gt; Router -&gt; UI</li>
 </ol>
 </li>
 </ul>
-<hr>
-<h4 id="XMLHttpRequest发送请求："><a href="#XMLHttpRequest发送请求：" class="headerlink" title="XMLHttpRequest发送请求："></a>XMLHttpRequest发送请求：</h4><ul>
-<li><p>open(method,url,async)</p>
-<ol>
-<li>method：规定HTTP发送请求的方式是get还是post,不区分大小写，一般来说用大写</li>
-<li>url：请求地址(相对地址或绝对地址)</li>
-<li>async:同步/异步(false/true)，默认是异步也就是true，可以不用填写</li>
-</ol>
-</li>
-<li><p>send(string):</p>
-<p>  发送到服务器（该参数可以填或者不填—–get方法不填或填null，post:一般要填）</p>
-</li>
+<h2 id="React-Router参数"><a href="#React-Router参数" class="headerlink" title="React Router参数"></a>React Router参数</h2><ul>
+<li>定义方式,ex: <code>path=&quot;list/:id&quot;</code>.</li>
+<li>params,ex: ‘this.props.params.id’.</li>
 </ul>
-<p><img src="http://img.mukewang.com/58b2f3800001d7d812800720.jpg" alt="image"></p>
-<hr>
-<h4 id="XMLHttpRequest取得响应"><a href="#XMLHttpRequest取得响应" class="headerlink" title="XMLHttpRequest取得响应"></a>XMLHttpRequest取得响应</h4><ul>
-<li>responseText:获得字符串形式的响应数据</li>
+<h2 id="React-Router教程"><a href="#React-Router教程" class="headerlink" title="React Router教程"></a>React Router教程</h2><ul>
+<li><a href="https://w3ctech.com/topic/1889" target="_blank" rel="external">在 React 中用 React Router 创建单页应用</a>.</li>
+<li><a href="https://w3ctech.com/topic/1894" target="_blank" rel="external">React Router</a>.</li>
 </ul>
-<ul>
-<li>responseXML：获得XML形式的响应数据（比较少）</li>
-<li>status和statusText:以数字和文本形式返回HTTP状态码</li>
-<li>getAllResponseHeader()：获取所有的响应报头</li>
-<li>getResponseHeader()：查询响应中的某个字段的值</li>
-</ul>
-<h4 id="readyState属性的变化代表服务器响应的变化"><a href="#readyState属性的变化代表服务器响应的变化" class="headerlink" title="readyState属性的变化代表服务器响应的变化"></a>readyState属性的变化代表服务器响应的变化</h4><ol>
-<li>请求未初始化，open还没有调用</li>
-<li>服务器连接已建立，open已经调用了</li>
-<li>请求已接收，也就是接收到头信息了</li>
-<li>请求处理中，也就是接收到了响应主体</li>
-<li>请求已完成，且响应已就绪，也就是响应完成了</li>
-</ol>
 
       
     </div>
@@ -513,9 +415,11 @@ XMLHttpREquest对象
       
         <div class="post-tags">
           
-            <a href="/tags/Ajax/" rel="tag"># Ajax</a>
-          
             <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/React-Router/" rel="tag"># React Router</a>
           
         </div>
       
@@ -528,8 +432,8 @@ XMLHttpREquest对象
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/27/go-bang/" rel="next" title="慕课网-人机大战五子棋AI篇学习笔记">
-                <i class="fa fa-chevron-left"></i> 慕课网-人机大战五子棋AI篇学习笔记
+              <a href="/2017/04/09/javascript-this/" rel="next" title="【转】浅析Javascript 中的 this 的七种使用场景">
+                <i class="fa fa-chevron-left"></i> 【转】浅析Javascript 中的 this 的七种使用场景
               </a>
             
           </div>
@@ -537,10 +441,6 @@ XMLHttpREquest对象
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/27/h5-newTitle/" rel="prev" title="HTML5中的新结构标签">
-                HTML5中的新结构标签 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -698,7 +598,7 @@ XMLHttpREquest对象
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步"><span class="nav-number">1.</span> <span class="nav-text">异步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体实现："><span class="nav-number">1.0.1.</span> <span class="nav-text">具体实现：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XMLHttpREquest对象"><span class="nav-number">2.</span> <span class="nav-text">XMLHttpREquest对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP请求"><span class="nav-number">3.</span> <span class="nav-text">HTTP请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP请求过程"><span class="nav-number">3.0.1.</span> <span class="nav-text">HTTP请求过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP组成部分"><span class="nav-number">3.0.2.</span> <span class="nav-text">HTTP组成部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重点概念"><span class="nav-number">3.0.3.</span> <span class="nav-text">重点概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMLHttpRequest发送请求："><span class="nav-number">3.0.4.</span> <span class="nav-text">XMLHttpRequest发送请求：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMLHttpRequest取得响应"><span class="nav-number">3.0.5.</span> <span class="nav-text">XMLHttpRequest取得响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#readyState属性的变化代表服务器响应的变化"><span class="nav-number">3.0.6.</span> <span class="nav-text">readyState属性的变化代表服务器响应的变化</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-Router的一些概念"><span class="nav-number">1.</span> <span class="nav-text">React Router的一些概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-Router参数"><span class="nav-number">2.</span> <span class="nav-text">React Router参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-Router教程"><span class="nav-number">3.</span> <span class="nav-text">React Router教程</span></a></li></ol></div>
             
 
           </div>
