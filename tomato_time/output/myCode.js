@@ -13803,8 +13803,8 @@ var Setting = function (_React$Component) {
       localStorage.timeList = timeList;
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
       this.setTimeList();
     }
   }, {
@@ -14479,6 +14479,11 @@ var Root = function (_React$Component) {
   }
 
   _createClass(Root, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      localStorage.timeList = [25, 5, 25, 5, 25, 5, 25, 15];
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
