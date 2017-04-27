@@ -1,102 +1,15 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="css/style.css"/>
-		<title>focus</title>
-	</head>
-	<body>
-		<canvas class="" id="circle" width="414" height="414">
-			<p>Oops,你的浏览器不支持canvas</p>
-		</canvas>
-		<section class="wrap">
-			<nav class="leftbar">
-				<ul>
-					<li id="more-left"><i id="more__left" class="fa fa-chevron-up fa-rotate-90 fa-lg"></i><i id="more__right" class="hide"></i></li>
-					<li id="home"><i class="fa fa-home fa-lg"></i><span>主页</span></li>
-					<li id="setting"><i class="fa fa-cog fa-lg fa-spin"></i><span>设置</span></li>
-				</ul>
-			</nav>
-			<section class="main--wrap ">
-				<header class="rate--wrap"><div id="rate"></div></header>
-				<section class="main">
-					<span id="time">
-					00:00
-					</span>
-
-				</section>
-				<aside class="aside">
-					<span id="start">
-						<i class="fa fa-play fa-3x"></i>
-					</span>
-					<span class=" start--bg bg">
-						<i class="fa fa-play fa-3x"></i>
-					</span>
-				</aside>
-			</section>
-			<section class="setting wrap  hide">
-					<h1>设置</h1>
-					<div class="select--group  ">
-						<div class="select">
-							<span>工作时间</span><br />
-							<select id="workingtime">
-								<option>1</option>
-								<option>5</option>
-								<option>10</option>
-								<option>15</option>
-								<option>20</option>
-								<option selected="selected">25</option>
-								<option>30</option>
-								<option>35</option>
-								<option>40</option>
-								<option>45</option>
-								<option>50</option>
-								<option>55</option>
-							</select>
-						</div>
-						<div class="select">
-							<span>休息时间</span><br />
-							<select id="breaktime">
-								<option>1</option>
-								<option>3</option>
-								<option selected="selected">5</option>
-								<option>10</option>
-								<option>15</option>
-							</select>
-						</div>
-						<div class="select">
-							<span>长歇时间</span><br />
-							<select id="breaktime--long">
-								<option>5</option>
-								<option>10</option>
-								<option selected="selected">15</option>
-								<option>20</option>
-								<option>25</option>
-								<option>30</option>
-								<option>35</option>
-								<option>40</option>
-								<option>45</option>
-								<option>50</option>
-								<option>55</option>
-							</select>
-						</div>
-						</div>
-					</div>
-				</section>
-			<footer class="footbar">
-				<ul>
-					<li id="more"><i id="more__up" class="fa fa-chevron-up fa-lg"></i><i id="more__down" class="hide"></i></li>
-					<li id="refresh"><i class="fa fa-refresh fa-lg "></i><br /><span class="footbar__text">重置</span></li>
-					<li id="end"><i class="fa fa-step-forward fa-lg hide"></i><i class="fa fa-step-forward fa-lg bg "></i><br /><span class="footbar__text">结束</span></li>
-					<li id="pause"><i class="fa fa-pause fa-lg hide"></i><i class="fa fa-pause fa-lg bg "></i><br /><span class="footbar__text">暂停</span></li>
-				</ul>
-				<!-- <span id="copyright">
-					code by <a href="https://codepen.io/Sunplantlist/" target="_blank">@Sunplantlist</a> based on 番茄钟10
-				</span> -->
-			</footer>
-			<audio id="music" src="img/Alarm03.wav" loop="loop"></audio>
-		</section>
-		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
-	</body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <title>Tomato time</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="output/myCode.js"></script>
+</body>
 </html>

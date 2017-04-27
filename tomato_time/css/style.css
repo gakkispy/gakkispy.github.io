@@ -2,6 +2,13 @@
 	padding: 0;margin: 0;
 }
 
+a {
+  color: black !important; 
+}
+a:visited {
+  color: black !important;
+}
+
 i {
 	cursor: pointer;
 }
@@ -19,32 +26,73 @@ ul {
 	left: 0;
 	top: 0;
 	height: 100%;
-	width: 45px;
 	background-color: #f2f2f2;
+  transition:1s;
 }
+
+.leftbar-hide {
+  width: 45px;
+}
+.leftbar-show {
+  width: 90px;
+}
+
 /*左栏元素排列*/
 
 .leftbar li {
 	display: block;
 	margin-left: 10px;
-	margin-top: 65px;
+	margin-top: 60px;
 	overflow: hidden;
 	height: 20px;
+	padding-bottom: 3px;
 }
 
 /*左栏文字超出显示区域达到隐藏效果*/
 .leftbar span {
 	display: inline-block;
-	margin-left: 20px;
+	margin-left: 16px;
 }
 /*进度条灰色背景*/
 .rate--wrap  {
 	height: 20px;
-	width: 100%;
+	width: 420px;
 	border: 1px solid #e8e8e8;
 	background-color: #ccc;
 }
 
+/*进度条*/
+.rate--block {
+  height: 100%;
+  width: 100%;
+}
+
+.rate--block>li {
+  display: none;
+  height: 100%;
+  animation-timing-function:linear;
+  animation-fill-mode: forwards;
+  width: 0;
+}
+
+.rate--block>li:nth-child(odd) {
+  background-color: #f44336;
+  /*height: 100%;*/
+  /*width: 80px;*/
+  animation-name: work;
+
+
+}
+.rate--block>li:nth-child(even) {
+  background-color: #2196f3;
+  /*width: 20px;*/
+  animation-name: break;
+}
+
+.rate--block>li:nth-last-child(1) {
+  /*width: 40px;*/
+  animation-name: longbreak;
+}
 
 /*进度条动画*/
 #rate {
@@ -62,173 +110,29 @@ ul {
 }
 /*偷懒就在css里设置了很多keyframes*/
 /*webkit*/
-@-webkit-keyframes tomato{
+@-webkit-keyframes work{
 	from{width: 0;}
-	to{width: 100%}
+	to{width: 80px;}
 }
 
-@-webkit-keyframes tomato_01{
-	from{width: 19.21%;}
-	to{width: 100%;}
-}
-
-@-webkit-keyframes tomato_02{
-	from{width: 23.06%;}
-	to{width: 100%;}
-}
-
-@-webkit-keyframes tomato_03{
-	from{width: 42.28%;}
-	to{width: 100%;}
-}
-
-@-webkit-keyframes tomato_04{
-	from{width: 46.12%;}
-	to{width: 100%;}
-}
-
-@-webkit-keyframes tomato_05{
-	from{width: 65.35%;}
-	to{width: 100%;}
-}
-
-@-webkit-keyframes tomato_06{
-	from{width: 69.20%;}
-	to{width: 100%;}
-}
-
-@-webkit-keyframes tomato_07{
-	from{width: 88.43%;}
-	to{width: 100%;}
-}
-
-/*mozila*/
-@-moz-keyframes tomato{
+@-webkit-keyframes break{
 	from{width: 0;}
-	to{width: 100%}
+	to{width: 20px;}
 }
 
-@-moz-keyframes tomato_01{
-	from{width: 19.21%;}
-	to{width: 100%;}
-}
-
-@-moz-keyframes tomato_02{
-	from{width: 23.06%;}
-	to{width: 100%;}
-}
-
-@-moz-keyframes tomato_03{
-	from{width: 42.28%;}
-	to{width: 100%;}
-}
-
-@-moz-keyframes tomato_04{
-	from{width: 46.12%;}
-	to{width: 100%;}
-}
-
-@-moz-keyframes tomato_05{
-	from{width: 65.35%;}
-	to{width: 100%;}
-}
-
-@-moz-keyframes tomato_06{
-	from{width: 69.20%;}
-	to{width: 100%;}
-}
-
-@-moz-keyframes tomato_07{
-	from{width: 88.43%;}
-	to{width: 100%;}
-}
-
-/*微软*/
-
-@-ms-keyframes tomato{
+@-webkit-keyframes longbreak{
 	from{width: 0;}
-	to{width: 100%}
+	to{width: 40px;}
 }
 
-@-ms-keyframes tomato_01{
-	from{width: 19.21%;}
-	to{width: 100%;}
-}
 
-@-ms-keyframes tomato_02{
-	from{width: 23.06%;}
-	to{width: 100%;}
-}
-
-@-ms-keyframes tomato_03{
-	from{width: 42.28%;}
-	to{width: 100%;}
-}
-
-@-ms-keyframes tomato_04{
-	from{width: 46.12%;}
-	to{width: 100%;}
-}
-
-@-ms-keyframes tomato_05{
-	from{width: 65.35%;}
-	to{width: 100%;}
-}
-@-ms-keyframes tomato_06{
-	from{width: 69.20%;}
-	to{width: 100%;}
-}
-
-@-ms-keyframes tomato_07{
-	from{width: 88.43%;}
-	to{width: 100%;}
-}
-
-/*nomal*/
-
-@keyframes tomato{
-	from{width: 0;}
-	to{width: 100%}
-}
-
-@keyframes tomato_01{
-	from{width: 19.21%;}
-	to{width: 100%;}
-}
-
-@keyframes tomato_02{
-	from{width: 23.06%;}
-	to{width: 100%;}
-}
-
-@keyframes tomato_03{
-	from{width: 42.28%;}
-	to{width: 100%;}
-}
-
-@keyframes tomato_04{
-	from{width: 46.12%;}
-	to{width: 100%;}
-}
-
-@keyframes tomato_05{
-	from{width: 65.35%;}
-	to{width: 100%;}
-}
-@keyframes tomato_06{
-	from{width: 69.20%;}
-	to{width: 100%;}
-}
-
-@keyframes tomato_07{
-	from{width: 88.43%;}
-	to{width: 100%;}
-}
 /*通用包裹，然而只包裹了设置块，懒得改了ლ(╹◡╹ლ)*/
-.wrap {
-	width: 420px;
-	margin: 0 auto;
-	margin-top: 200px;
+.main--wrap {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  height: 562px;
 }
 /*主体圆环*/
 .main {
@@ -263,7 +167,7 @@ ul {
 
 .start--bg {
 	color: #E8E8E8;
-	top: 714px;
+	top: 514px;
 }
 
 /*设置页面*/
@@ -294,24 +198,36 @@ ul {
 .footbar {
 	position: fixed;
 	left: 0;
-	bottom: -45px;
 	height: 80px;
 	background-color: #e6e6e6;
 	width: 100%;
 	z-index: -1;
-	text-align: center;
+  transition: 1s;
+}
+
+.footbar-down {
+  bottom: -45px;
+}
+
+.footbar-up {
+  bottom: 0;
 }
 /*底栏元素靠左*/
-.footbar ul {
-	/*position: relative;*/
+.footbar_btn {
 	margin-right: 25px;
+  float: right;
+  color: #808080;
+}
+.footbar_note {
+  position: absolute;
+  right:34px;
+  top: 40px;
 }
 /*底栏元素个体设置*/
 .footbar li{
 	position: relative;
-	text-align: center;
-	float: right;
-	margin-top: 10px;
+	text-align: left;
+	margin-top: 6px;
 	display: inline-block;
 	width: 65px;
 	z-index: 1;
@@ -339,10 +255,19 @@ ul {
 /*cnavas*/
 #circle {
 	position: absolute;
-	top: 262px;
+	top: 50%;
 	left: 50%;
-	transform: translateX(-50%);
+	transform: translate(-50%,-53%);
 	z-index: 999;
 }
 
+#up {
+  color: #000;
+}
 
+#refresh {
+	color: #000;
+}
+.footbar .active {
+  color: #000;
+}
