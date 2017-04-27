@@ -13663,7 +13663,7 @@ var Index = function (_React$Component) {
     _classCallCheck(this, Index);
 
     var _this = _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).call(this));
-
+	console.log(localStorage.timeList);
     var timeList = localStorage.timeList.split(',');
     _this.state = {
       "value": Number(timeList[0]) * 60,
