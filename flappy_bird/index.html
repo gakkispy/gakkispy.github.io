@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Flappy Bird</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div id="wrapBg"><!--游戏背景-->
+			<div id="headTitle"><!--开始标题-->
+				<img src="img/bird0.png" alt="鸟" id="headBird" /><!--开始界面小鸟-->
+			</div>
+			<button id="startBtn"></button><!--开始按钮-->
+			<div id="grassLand"></div><!--草地-->
+			<div id="score">
+				<div class="number" id="num1"></div>
+				<div class="number" id="num2"></div>
+				<div class="number" id="num3"></div>
+			</div>
+			<div id="gameOver">
+				<div id="finalScore">
+					<div class="number" id="num6"></div>
+					<div class="number" id="num5"></div>
+					<div class="number" id="num4"></div>
+				</div>
+				<div id="bestScore">
+					<div class="number" id="num9"></div>
+					<div class="number" id="num8"></div>
+					<div class="number" id="num7"></div>
+				</div>
+				<img src="img/game_over.jpg" alt="game over">
+				<img src="img/message.jpg" alt="message">
+				<img id="ok" src="img/ok.jpg" alt="ok">
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/score_manage.js" ></script>
+		<script type="text/javascript" src="js/roadblock.js" ></script>
+		<script type="text/javascript" src="js/game_manage.js" ></script>
+		<script type="text/javascript" src="js/bird.js" ></script>
+		<!-- <script type="text/javascript" src="js/bird.js" ></script> -->
+		<script type="text/javascript" src="js/start.js" ></script>
+	</body>
+</html>
