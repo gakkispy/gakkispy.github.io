@@ -1,0 +1,950 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ES6,promise," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文转载自：众成翻译译者：cherryvenus链接：http://www.zcfy.cc/article/1961原文：https://scotch.io/tutorials/javascript-promises-for-dummies
+
+Javascript Promises 不难。然而，许多人刚开始接触这个概念的时候，觉得有些难以理解。因此，我写下了我是如何理解 Promise 的，用一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给初学者的 JavaScript Promise 教程 | Scotch">
+<meta property="og:url" content="https://gakkispy.github.io/2017/05/28/es6-promise/index.html">
+<meta property="og:site_name" content="红头发的韦斯莱">
+<meta property="og:description" content="本文转载自：众成翻译译者：cherryvenus链接：http://www.zcfy.cc/article/1961原文：https://scotch.io/tutorials/javascript-promises-for-dummies
+
+Javascript Promises 不难。然而，许多人刚开始接触这个概念的时候，觉得有些难以理解。因此，我写下了我是如何理解 Promise 的，用一">
+<meta property="og:image" content="http://p0.qhimg.com/t01e6eddb90bb3fcc07.gif">
+<meta property="og:image" content="http://p0.qhimg.com/t01ddb624d027e73869.gif">
+<meta property="og:updated_time" content="2017-05-28T11:06:23.320Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="给初学者的 JavaScript Promise 教程 | Scotch">
+<meta name="twitter:description" content="本文转载自：众成翻译译者：cherryvenus链接：http://www.zcfy.cc/article/1961原文：https://scotch.io/tutorials/javascript-promises-for-dummies
+
+Javascript Promises 不难。然而，许多人刚开始接触这个概念的时候，觉得有些难以理解。因此，我写下了我是如何理解 Promise 的，用一">
+<meta name="twitter:image" content="http://p0.qhimg.com/t01e6eddb90bb3fcc07.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://gakkispy.github.io/2017/05/28/es6-promise/"/>
+
+
+
+
+
+  <title> 给初学者的 JavaScript Promise 教程 | Scotch | 红头发的韦斯莱 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title" data-text="红头发的韦斯莱">红头发的韦斯莱</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-portfolio">
+          <a href="/portfolio" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br />
+            
+            练手项目
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://gakkispy.github.io/2017/05/28/es6-promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="gakkispy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="红头发的韦斯莱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                给初学者的 JavaScript Promise 教程 | Scotch
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T18:41:52+08:00">
+                2017-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文转载自：<a href="http://www.zcfy.cc" target="_blank" rel="external">众成翻译</a><br>译者：<a href="http://www.zcfy.cc/@cherryvenus" target="_blank" rel="external">cherryvenus</a><br>链接：<a href="http://www.zcfy.cc/article/1961" target="_blank" rel="external">http://www.zcfy.cc/article/1961</a><br>原文：<a href="https://scotch.io/tutorials/javascript-promises-for-dummies" target="_blank" rel="external">https://scotch.io/tutorials/javascript-promises-for-dummies</a></p>
+</blockquote>
+<p><strong>Javascript Promises</strong> 不难。然而，许多人刚开始接触这个概念的时候，觉得有些难以理解。因此，我写下了我是如何理解 Promise 的，用一个通俗易懂的方法。</p>
+<h2 id="理解-Promise"><a href="#理解-Promise" class="headerlink" title="理解 Promise"></a>理解 Promise</h2><p>Promise 简介:</p>
+<p>“假设你是一个<strong>宝宝</strong>. 你的妈妈<strong>承诺（Promise）</strong>你，下个礼拜她会给你一台<strong>新手机</strong>。”</p>
+<a id="more"></a>
+<p>你<em>不知道</em>，下个礼拜你是否会拿到手机。你的妈妈可以<em>真的给你买</em>一个全新的手机，或者<em>放你鸽子</em>，也有可能如果她不开心:(了就扣下了手机。</p>
+<p>这个就是<strong>承诺（Promise）</strong>。一个 Promise 有3个状态。他们分别是：</p>
+<ol>
+<li>Promise 是<strong>待定的（pending）</strong>： 你不知道你下个礼拜能不能拿到手机。</li>
+<li>Promise 是<strong>已解决的（resolved）</strong>：你的妈妈真的给你买了一个全新的手机。</li>
+<li>Promise 是<strong>被拒绝的（rejected）</strong>: 因为你妈妈不开心所以不给你手机了。</li>
+</ol>
+<h2 id="创建一个-Promise"><a href="#创建一个-Promise" class="headerlink" title="创建一个 Promise"></a>创建一个 Promise</h2><p>让我们将这个转化为 JavaScript。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/* ES5 */</div><div class="line">var isMomHappy = false;</div><div class="line">// Promise</div><div class="line">var willIGetNewPhone = new Promise(</div><div class="line">    function (resolve, reject) &#123;</div><div class="line">        if (isMomHappy) &#123;</div><div class="line">            var phone = &#123;</div><div class="line">                brand: &apos;Samsung&apos;,</div><div class="line">                color: &apos;black&apos;</div><div class="line">            &#125;;</div><div class="line">            resolve(phone); // 完成了</div><div class="line">        &#125; else &#123;</div><div class="line">            var reason = new Error(&apos;妈妈不开心&apos;);</div><div class="line">            reject(reason); // reject</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>代码本身颇具表现力。</p>
+<ol>
+<li><p>我们用一个布尔值 <code>isMomHappy</code>，来定义妈妈是否开心。</p>
+</li>
+<li><p>我们有一个命名为<code>willIGetNewPhone</code>的 Promise 。这个 Promise 可以是 <code>已完成的（resolved）</code> （如果妈妈给你买了一个新手机）或者 <code>被拒绝的（rejected）</code> （妈妈不开心，她没有给你买一个）。</p>
+</li>
+<li><p>这里有一个标准的语法来新建一个 <code>Promise</code>，参考<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">MDN 文档</a>，一个 promise 语法看上去像这样。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// promise 语法看上去像这样</div><div class="line">new Promise(/* executor*/ function (resolve, reject) &#123; ... &#125; );</div></pre></td></tr></table></figure>
+<ol>
+<li>你需要记住的是，当结果是正确的，在你的 promise 中调用 <code>resolve(正确的值)</code>。在我们的例子中，如果妈妈很开心，我们就会拿到手机。因此，我们调用 <code>resolve</code> 函数和 <code>phone</code> 这个变量。如果我们的妈妈不开心，我们会调用 <code>reject</code> 函数和一个理由（reason）<code>reject(reason)</code>；</li>
+</ol>
+<h2 id="使用-Promise"><a href="#使用-Promise" class="headerlink" title="使用 Promise"></a>使用 Promise</h2><p>现在，我们有一个 Promise。来看看怎么使用它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/* ES5 */</div><div class="line">...</div><div class="line">// 调用我们的 Promise</div><div class="line">var askMom = function () &#123;</div><div class="line">    willIGetNewPhone</div><div class="line">        .then(function (fulfilled) &#123;</div><div class="line">            // 太好啦, 你获得了一个新手机</div><div class="line">            console.log(fulfilled);</div><div class="line">         // output: &#123; brand: &apos;Samsung&apos;, color: &apos;black&apos; &#125;</div><div class="line">        &#125;)</div><div class="line">        .catch(function (error) &#123;</div><div class="line">            // 好不幸，你妈妈没买手机</div><div class="line">            console.log(error.message);</div><div class="line">         // output: &apos;妈妈不开心&apos;</div><div class="line">        &#125;);</div><div class="line">&#125;;</div><div class="line">askMom();</div></pre></td></tr></table></figure>
+<ol>
+<li><p>我们有一个名为 <code>askMom</code> 的函数。在这个函数中，我们会使用 Promise <code>willIGetNewPhone</code>。</p>
+</li>
+<li><p>一旦 Promise 被解决（resolved）或者被拒（rejected），我门希望采取些措施。我们用 <code>.then</code> 和 <code>.catch</code> 来实现。</p>
+</li>
+<li><p>在我们的例子中，<code>.then</code> 之中有个 <code>function(fulfilled) { ... }</code> 。<code>fulfilled</code> 是什么？<code>fulfilled</code> 就是是你传入 Promise 的 <code>resolve(your_success_value)</code>.因此，在我们例子中就是 <code>phone</code>。</p>
+</li>
+<li><p>我们在 <code>.catch</code> 中有 <code>function(error){ ... }</code>。<code>error</code> 是什么？正如你猜测的，<code>error</code> 正是你传入 Promise 中的 <code>reject(your_fail_value)</code> 。因此，在我们的例子中就是 <code>reason</code>。</p>
+</li>
+</ol>
+<p>让我们看看例子运行之后的结果吧！</p>
+<p>Demo: <a href="https://jsbin.com/nifocu/1/edit?js,console" target="_blank" rel="external">https://jsbin.com/nifocu/1/edit?js,console</a></p>
+<p><img src="http://p0.qhimg.com/t01e6eddb90bb3fcc07.gif" alt="例子"></p>
+<h2 id="串联-Promise"><a href="#串联-Promise" class="headerlink" title="串联 Promise"></a>串联 Promise</h2><p>Promiss 是可串联的。</p>
+<p>也就是说，你，宝宝，<strong>承诺（Promise）</strong>你的小伙伴，当你妈妈给你买了手机，你就会<strong>给他们看</strong>新手机。</p>
+<p>这就是另一个 Promise 啦。我们来写一个！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 简略</div><div class="line">...</div><div class="line">// 第二个 promise</div><div class="line">var showOff = function (phone) &#123;</div><div class="line">    return new Promise(</div><div class="line">        function (resolve, reject) &#123;</div><div class="line">            var message = &apos;hey 伙计，我有个新 &apos; +</div><div class="line">                phone.color + &apos; &apos; + phone.brand + &apos;手机&apos;;</div><div class="line">            resolve(message);</div><div class="line">        &#125;</div><div class="line">    );</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>说明:</p>
+<ul>
+<li><p>在这个例子中，你可能意识到我们没有调用 <code>reject</code>。因为这个是可选的参数。</p>
+</li>
+<li><p>我们可以简化这个样例就像用 <code>Promise.resolve</code> 代替。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 简略</div><div class="line">...</div><div class="line"></div><div class="line">// 第二个 promise</div><div class="line">var showOff = function (phone) &#123;</div><div class="line">    var message = &apos;hey 伙计，我有个新 &apos; +</div><div class="line">                phone.color + &apos; &apos; + phone.brand + &apos; 手机&apos;;</div><div class="line">    return Promise.resolve(message);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>让我们串联 Promise。你，宝宝只能在<code>willIGetNewPhone</code> Promise 实现之后，才能开始 <code>showOff</code> Promise。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">// 调用 Promise</div><div class="line">var askMom = function () &#123;</div><div class="line">    willIGetNewPhone</div><div class="line">    .then(showOff) // 在这里串联</div><div class="line">    .then(function (fulfilled) &#123;</div><div class="line">            console.log(fulfilled);</div><div class="line">         // output: &apos;Hey 伙计, 我有一个新的黑色三星手机。&apos;</div><div class="line">        &#125;)</div><div class="line">        .catch(function (error) &#123;</div><div class="line">            // 好不幸，你妈妈没买手机</div><div class="line">            console.log(error.message);</div><div class="line">         // output: &apos;妈妈不开心&apos;</div><div class="line">        &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>串联 Promise 简单吧！</p>
+<h2 id="Promises-是异步的"><a href="#Promises-是异步的" class="headerlink" title="Promises 是异步的"></a>Promises 是异步的</h2><p>Promise 是异步的。让我们在调用 Promise 之前和之后各打印一个信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 调用我们的Ppromise</div><div class="line">var askMom = function () &#123;</div><div class="line">    console.log(&apos;询问妈妈之前&apos;); // 运行之前打印</div><div class="line">    willIGetNewPhone</div><div class="line">        .then(showOff)</div><div class="line">        .then(function (fulfilled) &#123;</div><div class="line">            console.log(fulfilled);</div><div class="line">        &#125;)</div><div class="line">        .catch(function (error) &#123;</div><div class="line">            console.log(error.message);</div><div class="line">        &#125;);</div><div class="line">    console.log(&apos;询问妈妈之后&apos;); // 运行之后打印</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>预计的输出序列是怎么样的？也许你预计是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1\. 询问妈妈之前</div><div class="line">2\. Hey 伙计, 我有一个新的黑色三星手机。</div><div class="line">3\. 询问妈妈之后</div></pre></td></tr></table></figure>
+<p>然而, 真实的输出顺序是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1\. 询问妈妈之前</div><div class="line">2\. 询问妈妈之后</div><div class="line">3\. Hey 朋友, 我有一个新的黑色三星手机。</div></pre></td></tr></table></figure>
+<p><img src="http://p0.qhimg.com/t01ddb624d027e73869.gif" alt="输出"></p>
+<h4 id="为什么-因为生命-或者-JavaScript-不等人。"><a href="#为什么-因为生命-或者-JavaScript-不等人。" class="headerlink" title="为什么? 因为生命 (或者 JavaScript) 不等人。"></a>为什么? 因为生命 (或者 JavaScript) 不等人。</h4><p>宝宝在玩的时候等待着妈妈的承诺（promise） (新手机).不是吗? 这个我们称之为 <strong>异步（asynchronous）</strong>,<br>代码不会因为阻塞或等待结果而不运行. 任何想等待 Promise 之后再运行的, 你需要把他们放入 <code>.then</code>.</p>
+<h2 id="ES5-ES6-2015-ES7-Next-中的-promise"><a href="#ES5-ES6-2015-ES7-Next-中的-promise" class="headerlink" title="ES5, ES6/2015, ES7/Next 中的 promise"></a>ES5, ES6/2015, ES7/Next 中的 promise</h2><h4 id="ES5-大多数浏览器"><a href="#ES5-大多数浏览器" class="headerlink" title="ES5 - 大多数浏览器"></a>ES5 - 大多数浏览器</h4><p>demo代码在 ES5 的环境（所有主流浏览器+NodeJs）中是可以运行，如果你包含了<a href="http://bluebirdjs.com/docs/getting-started.html" target="_blank" rel="external">Bluebird</a> Promise 库。这是因为 ES5 不支持直接调用 Promise 。另一个有名的 Promise 库是 Kris Kowal 的<a href="https://github.com/kriskowal/q" target="_blank" rel="external">Q</a>。</p>
+<h4 id="ES6-ES2015-现代浏览器-NodeJs-v6"><a href="#ES6-ES2015-现代浏览器-NodeJs-v6" class="headerlink" title="ES6 / ES2015 - 现代浏览器, NodeJs v6"></a>ES6 / ES2015 - 现代浏览器, NodeJs v6</h4><p>demo代码可以直接调用，因为ES6支持本地 Promise。外加，和 ES6 函数 <strong>fat arrow =&gt;</strong>，以及 <code>const</code> 和 <code>let</code> 搭配使用，我们可以进一步简化代码`。</p>
+<p>这里是 ES6 代码的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">/* ES6 */</div><div class="line">const isMomHappy = true;</div><div class="line"></div><div class="line">// Promise</div><div class="line">const willIGetNewPhone = new Promise(</div><div class="line">    (resolve, reject) =&gt; &#123; // fat arrow</div><div class="line">        if (isMomHappy) &#123;</div><div class="line">            const phone = &#123;</div><div class="line">                brand: &apos;Samsung&apos;,</div><div class="line">                color: &apos;black&apos;</div><div class="line">            &#125;;</div><div class="line">            resolve(phone);</div><div class="line">        &#125; else &#123;</div><div class="line">            const reason = new Error(&apos;mom is not happy&apos;);</div><div class="line">            reject(reason);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">);</div><div class="line"></div><div class="line">const showOff = function (phone) &#123;</div><div class="line">    const message = &apos;Hey 伙计, 我有个一个新&apos; +</div><div class="line">                phone.color + &apos; &apos; + phone.brand + &apos;手机&apos;;</div><div class="line">    return Promise.resolve(message);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 调用我们的promise</div><div class="line">const askMom = function () &#123;</div><div class="line">    willIGetNewPhone</div><div class="line">        .then(showOff)</div><div class="line">        .then(fulfilled =&gt; console.log(fulfilled)) // fat arrow</div><div class="line">        .catch(error =&gt; console.log(error.message)); // fat arrow</div><div class="line">&#125;;</div><div class="line"></div><div class="line">askMom();</div></pre></td></tr></table></figure>
+<p>注意，所有的<code>var</code>都用 <code>const</code>代替。所有的 <code>function(resolve, reject)</code> 都简化为<code>(resolve, reject) =&gt;</code>。 这些改变有许多好处。阅读更多：</p>
+<ul>
+<li><p><a href="https://strongloop.com/strongblog/es6-variable-declarations/" target="_blank" rel="external">JavaScript ES6 的变量声明， let 和 const </a></p>
+</li>
+<li><p><a href="https://strongloop.com/strongblog/an-introduction-to-javascript-es6-arrow-functions/" target="_blank" rel="external">Javascript ES6 箭头函数介绍</a></p>
+</li>
+</ul>
+<h4 id="ES7-异步等待让语法看上去更整洁"><a href="#ES7-异步等待让语法看上去更整洁" class="headerlink" title="ES7 - 异步等待让语法看上去更整洁"></a>ES7 - 异步等待让语法看上去更整洁</h4><p>ES7 引入 <code>async</code> 和 <code>await</code> 语法。这让异步语法看上去更整洁和易于理解，而不用<code>.then</code> 和 <code>.catch</code>。</p>
+<p>用 ES7 的语法重写例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">/* ES7 */</div><div class="line">const isMomHappy = true;</div><div class="line"></div><div class="line">// Promise</div><div class="line">const willIGetNewPhone = new Promise(</div><div class="line">    (resolve, reject) =&gt; &#123;</div><div class="line">        if (isMomHappy) &#123;</div><div class="line">            const phone = &#123;</div><div class="line">                brand: &apos;Samsung&apos;,</div><div class="line">                color: &apos;black&apos;</div><div class="line">            &#125;;</div><div class="line">            resolve(phone);</div><div class="line">        &#125; else &#123;</div><div class="line">            const reason = new Error(&apos;妈妈不开心&apos;);</div><div class="line">            reject(reason);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">);</div><div class="line"></div><div class="line">// 2nd promise</div><div class="line">async function showOff(phone) &#123;</div><div class="line">    return new Promise(</div><div class="line">        (resolve, reject) =&gt; &#123;</div><div class="line">            var message = &apos;Hey 伙计, 我有一个新&apos; +</div><div class="line">                phone.color + &apos; &apos; + phone.brand + &apos;手机&apos;;</div><div class="line"></div><div class="line">            resolve(message);</div><div class="line">        &#125;</div><div class="line">    );</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 调用 Promise</div><div class="line">async function askMom() &#123;</div><div class="line">    try &#123;</div><div class="line">        console.log(&apos;before asking Mom&apos;);</div><div class="line"></div><div class="line">        let phone = await willIGetNewPhone;</div><div class="line">        let message = await showOff(phone);</div><div class="line"></div><div class="line">        console.log(message);</div><div class="line">        console.log(&apos;after asking mom&apos;);</div><div class="line">    &#125;</div><div class="line">    catch (error) &#123;</div><div class="line">        console.log(error.message);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">(async () =&gt; &#123;</div><div class="line">    await askMom();</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>每当你需要在函数中返回一个 Promise 的时候，你要在函数之前添加 <code>async</code>。<br>E.g. <code>async function showOff(phone)</code></p>
+</li>
+<li><p>当你需要调用一个 promise，你需要在此之前添加 <code>await</code>。<br>E.g. <code>let phone = await willIGetNewPhone;</code> and <code>let message = await showOff(phone);</code>.</p>
+</li>
+<li><p>使用 <code>try { ... } catch(error) { ... }</code> 来捕捉 Promise 错误，<strong>被拒绝的</strong> promise</p>
+</li>
+</ol>
+<h2 id="为什么用-Promise-以及何时用他们"><a href="#为什么用-Promise-以及何时用他们" class="headerlink" title="为什么用 Promise 以及何时用他们?"></a>为什么用 Promise 以及何时用他们?</h2><p>为什么你需要 promise ？在 promise 之前我们是如何的？在回答这些问题之前，让我们回到基本原理。</p>
+<h3 id="普通函数-vs-异步函数"><a href="#普通函数-vs-异步函数" class="headerlink" title="普通函数 vs 异步函数"></a>普通函数 vs 异步函数</h3><p>让我们看看这两个例子，他们都执行两个数字相加，一个用普通函数相加，一个用远程方法相加。</p>
+<h4 id="普通函数相加两个数字"><a href="#普通函数相加两个数字" class="headerlink" title="普通函数相加两个数字"></a>普通函数相加两个数字</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 正常相加数字</div><div class="line"></div><div class="line">function add (num1, num2) &#123;</div><div class="line">    return num1 + num2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const result = add(1, 2); // you get result = 3 immediately</div></pre></td></tr></table></figure>
+<h5 id="异步函数相加两个数字"><a href="#异步函数相加两个数字" class="headerlink" title="异步函数相加两个数字"></a>异步函数相加两个数字</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 远程相加数字</div><div class="line"></div><div class="line">// 调用api获得结果</div><div class="line">const result = getAddResultFromServer(&apos;http://www.example.com?num1=1&amp;num2=2&apos;);</div><div class="line">// you get result  = &quot;undefined&quot;</div></pre></td></tr></table></figure>
+<p>如果你用普通函数相加两数字，你会马上获得结果。然而如果你发出一个远程调用来获得结果，那么你就需要等待，你不能马上得到结果。</p>
+<p>或者这样说，你不知道会不会得到结果，因为服务器可能会性能下降，响应慢等等。你不希望因为等待着结果，让整个进程都被堵住。</p>
+<p>调用API，下载文件，读取文件一些平时你会执行的异步操作。</p>
+<h4 id="Pomise-出现之前的世界-回调（Callback）"><a href="#Pomise-出现之前的世界-回调（Callback）" class="headerlink" title="Pomise 出现之前的世界: 回调（Callback）"></a>Pomise 出现之前的世界: 回调（Callback）</h4><p>我们一定要用 Prmoise 来做异步回调吗？不是的。优先于 promise ，我们用回调（callback）。回调（callback）仅仅是个你调用的函数，当你获得返回结果的时候。让我们修改之前的例子来获得一个回调。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// 远程相加两数字</div><div class="line">// 调用API获得结果</div><div class="line"></div><div class="line">function addAsync (num1, num2, callback) &#123;</div><div class="line">    //使用有名的 jQuery getJSON 的回调 API</div><div class="line">    return $.getJSON(&apos;http://www.example.com&apos;, &#123;</div><div class="line">        num1: num1,</div><div class="line">        num2: num2</div><div class="line">    &#125;, callback);</div><div class="line">&#125;</div><div class="line"></div><div class="line">addAsync(1, 2, success =&gt; &#123;</div><div class="line">    // callback</div><div class="line">    const result = success; // 这里你得到 result = 3</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这个语法看上去OK，为什么我们之后需要用 Promise ？</p>
+<h3 id="如果你想做一系列的异步操作怎么办？？"><a href="#如果你想做一系列的异步操作怎么办？？" class="headerlink" title="如果你想做一系列的异步操作怎么办？？"></a>如果你想做一系列的异步操作怎么办？？</h3><p>比如说，不同于一次仅仅相加两个数字，我们希望加3次。用普通的函数，我们这么做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 普通相加两个数字</div><div class="line"></div><div class="line">let resultA, resultB, resultC;</div><div class="line"></div><div class="line"> function add (num1, num2) &#123;</div><div class="line">    return num1 + num2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">resultA = add(1, 2); // 你马上获得 resultA = 3</div><div class="line">resultB = add(resultA, 3); // 你马上获得 esultB = 6</div><div class="line">resultC = add(resultB, 4); // 你马上获得  resultC = 10</div><div class="line"></div><div class="line">console.log(&apos;total&apos; + resultC);</div><div class="line">console.log(resultA, resultB, resultC);</div></pre></td></tr></table></figure>
+<p>用了回调之后，这个看上去是什么样的？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// 远程相加两个数字</div><div class="line">// 调用API获得结果</div><div class="line"></div><div class="line">let resultA, resultB, resultC;</div><div class="line"></div><div class="line">function addAsync (num1, num2, callback) &#123;</div><div class="line">    // use the famous jQuery getJSON callback API</div><div class="line">    return $.getJSON(&apos;http://www.example.com&apos;, &#123;</div><div class="line">        num1: num1,</div><div class="line">        num2: num2</div><div class="line">    &#125;, callback);</div><div class="line">&#125;</div><div class="line"></div><div class="line">addAsync(1, 2, success =&gt; &#123;</div><div class="line">    // callback 1</div><div class="line">    resultA = success; // you get result = 3 here</div><div class="line"></div><div class="line">    addAsync(resultA, 3, success =&gt; &#123;</div><div class="line">        // callback 2</div><div class="line">        resultB = success; // you get result = 6 here</div><div class="line"></div><div class="line">        addAsync(resultB, 4, success =&gt; &#123;</div><div class="line">            // callback 3</div><div class="line">            resultC = success; // you get result = 10 here</div><div class="line"></div><div class="line">            console.log(&apos;total&apos; + resultC);</div><div class="line">            console.log(resultA, resultB, resultC);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Demo: <a href="https://jsbin.com/barimo/edit?html,js,console" target="_blank" rel="external">https://jsbin.com/barimo/edit?html,js,console</a></p>
+<p>这个语法很不友好。更贴切地说，这个看上去像金字塔，人们经常称呼为 “回调地狱”，因为一个回调嵌在另一个回调之中。想象你有10个回调，你的代码嵌套了10次！</p>
+<h3 id="逃离回调地狱"><a href="#逃离回调地狱" class="headerlink" title="逃离回调地狱"></a>逃离回调地狱</h3><p>Promise 来拯救你了。让我们看一下相同例子的 Promise 的版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">// 使用observables，远程相加连个数字</div><div class="line"></div><div class="line">let resultA, resultB, resultC;</div><div class="line"></div><div class="line">function addAsync(num1, num2) &#123;</div><div class="line">    // 使用 ES6 抓取API, 这个返回一个 promise</div><div class="line">    return fetch(`http://www.example.com?num1=$&#123;num1&#125;&amp;num2=$&#123;num2&#125;`)</div><div class="line">        .then(x =&gt; x.json());</div><div class="line">&#125;</div><div class="line"></div><div class="line">addAsync(1, 2)</div><div class="line">    .then(success =&gt; &#123;</div><div class="line">        resultA = success;</div><div class="line">        return resultA;</div><div class="line">    &#125;)</div><div class="line">    .then(success =&gt; addAsync(success, 3))</div><div class="line">    .then(success =&gt; &#123;</div><div class="line">        resultB = success;</div><div class="line">        return resultB;</div><div class="line">    &#125;)</div><div class="line">    .then(success =&gt; addAsync(success, 4))</div><div class="line">    .then(success =&gt; &#123;</div><div class="line">        resultC = success;</div><div class="line">        return resultC;</div><div class="line">    &#125;)</div><div class="line">    .then(success =&gt; &#123;</div><div class="line">        console.log(&apos;total: &apos; + success)</div><div class="line">        console.log(resultA, resultB, resultC)</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<p>Demo: <a href="https://jsbin.com/qafane/edit?js,console" target="_blank" rel="external">https://jsbin.com/qafane/edit?js,console</a></p>
+<p>和 promise 我们用<code>.then</code>让回调在统一层次上。在某种程度上，这个看上去更加干净了，因为没有回调嵌套。当然，用 ES7 <code>async</code> 语法，我们可以加强这个例子，但是我把它留给你。:)</p>
+<h2 id="新鲜出炉的属性-监控属性-observables"><a href="#新鲜出炉的属性-监控属性-observables" class="headerlink" title="新鲜出炉的属性: 监控属性(observables)"></a>新鲜出炉的属性: 监控属性(observables)</h2><p>在你搞定 Promise 之前，有样叫做<code>Observables</code>的东西出现了，这让你处理异步数据更加简单。</p>
+<blockquote>
+<p>Observables 是懒惰的事件流，这个你可以提交0个或者更多的事件，并且可能不结束。</p>
+<ul>
+<li><a href="https://cycle.js.org/streams.html" target="_blank" rel="external">来源</a></li>
+</ul>
+</blockquote>
+<p>Promises 和 observables 之间几点关键的差异：</p>
+<ul>
+<li>Observables 是可以取消的</li>
+<li>Observables 是懒惰的</li>
+</ul>
+<p>不要怕，让我们看看用 Observables 写相同demo。在这个例子中，我为 Observables 使用 <a href="http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html" target="_blank" rel="external">RxJS</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">let Observable = Rx.Observable;</div><div class="line">let resultA, resultB, resultC;</div><div class="line"></div><div class="line">function addAsync(num1, num2) &#123;</div><div class="line">    // 用 ES6 抓取 API, 返回一个 promise</div><div class="line">    const promise = fetch(`http://www.example.com?num1=$&#123;num1&#125;&amp;num2=$&#123;num2&#125;`)</div><div class="line">        .then(x =&gt; x.json());</div><div class="line"></div><div class="line">    return Observable.fromPromise(promise);</div><div class="line">&#125;</div><div class="line"></div><div class="line">addAsync(1,2)</div><div class="line">  .do(x =&gt; resultA = x)</div><div class="line">  .flatMap(x =&gt; addAsync(x, 3))</div><div class="line">  .do(x =&gt; resultB = x)</div><div class="line">  .flatMap(x =&gt; addAsync(x, 4))</div><div class="line">  .do(x =&gt; resultC = x)</div><div class="line">  .subscribe(x =&gt; &#123;</div><div class="line">    console.log(&apos;total: &apos; + x)</div><div class="line">    console.log(resultA, resultB, resultC)</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<p>Demo: <a href="https://jsbin.com/dosaviwalu/edit?js,console" target="_blank" rel="external">https://jsbin.com/dosaviwalu/edit?js,console</a></p>
+<p>注意：</p>
+<ul>
+<li><code>Observable.fromPromise</code> 将一个 promise 转化为 Observable 流，</li>
+<li><code>.do</code> 和 <code>.flatMap</code> 是 observables 提供的操作符中的两个。</li>
+<li>流是懒惰的。当我们 <code>.subscribe</code> 它的时候，<code>addAsync</code> 才会运行。</li>
+</ul>
+<p>Observables 可以简单地处理恶心的东西。比如，<code>delay</code> 添加 <code>3 seconds</code> 函数，只有一行代码或者充实，因此你可以重试一个调用一定的次数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"></div><div class="line">addAsync(1,2)</div><div class="line">  .delay(3000) // delay 3 seconds</div><div class="line">  .do(x =&gt; resultA = x)</div><div class="line">  ...</div></pre></td></tr></table></figure>
+<p>好啦，让我们在未来的文章再讨论 observable 吧！</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>你有没有熟悉了 callback 和 Promise 呢？ 理解他们使用他们。不要担心 Observable， 也就这样。三个关键因素对你的开发来说，视情况而定。</p>
+<p>这里是所有的 <code>妈妈承诺买手机</code> demo的代码</p>
+<ul>
+<li><p>Demo (ES5): <a href="https://jsbin.com/habuwuyeqo/edit?html,js,console" target="_blank" rel="external">https://jsbin.com/habuwuyeqo/edit?html,js,console</a></p>
+</li>
+<li><p>Demo (ES6): <a href="https://jsbin.com/cezedu/edit?js,console" target="_blank" rel="external">https://jsbin.com/cezedu/edit?js,console</a></p>
+</li>
+<li><p>Demo (ES7): <a href="https://goo.gl/U3fPmh" target="_blank" rel="external">https://goo.gl/U3fPmh</a></p>
+</li>
+<li><p>Github example (ES7): <a href="https://github.com/chybie/js-async-await-promise" target="_blank" rel="external">https://github.com/chybie/js-async-await-promise</a></p>
+</li>
+</ul>
+<p>就这样！希望这篇文章能够铲除你征服 JavaScript Promise 路途上的荆棘、。快乐码农~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+            <a href="/tags/promise/" rel="tag"># promise</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/09/react-router-overview/" rel="next" title="React Router 概览">
+                <i class="fa fa-chevron-left"></i> React Router 概览
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="gakkispy" />
+          <p class="site-author-name" itemprop="name">gakkispy</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gakkispy" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://codepen.io/Sunplantlist/" target="_blank" title="CodePen">
+                  
+                    <i class="fa fa-fw fa-codepen"></i>
+                  
+                  CodePen
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2249052642" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解-Promise"><span class="nav-number">1.</span> <span class="nav-text">理解 Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个-Promise"><span class="nav-number">2.</span> <span class="nav-text">创建一个 Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Promise"><span class="nav-number">3.</span> <span class="nav-text">使用 Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#串联-Promise"><span class="nav-number">4.</span> <span class="nav-text">串联 Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promises-是异步的"><span class="nav-number">5.</span> <span class="nav-text">Promises 是异步的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么-因为生命-或者-JavaScript-不等人。"><span class="nav-number">5.0.1.</span> <span class="nav-text">为什么? 因为生命 (或者 JavaScript) 不等人。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES5-ES6-2015-ES7-Next-中的-promise"><span class="nav-number">6.</span> <span class="nav-text">ES5, ES6/2015, ES7/Next 中的 promise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ES5-大多数浏览器"><span class="nav-number">6.0.1.</span> <span class="nav-text">ES5 - 大多数浏览器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6-ES2015-现代浏览器-NodeJs-v6"><span class="nav-number">6.0.2.</span> <span class="nav-text">ES6 / ES2015 - 现代浏览器, NodeJs v6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES7-异步等待让语法看上去更整洁"><span class="nav-number">6.0.3.</span> <span class="nav-text">ES7 - 异步等待让语法看上去更整洁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么用-Promise-以及何时用他们"><span class="nav-number">7.</span> <span class="nav-text">为什么用 Promise 以及何时用他们?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通函数-vs-异步函数"><span class="nav-number">7.1.</span> <span class="nav-text">普通函数 vs 异步函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#普通函数相加两个数字"><span class="nav-number">7.1.1.</span> <span class="nav-text">普通函数相加两个数字</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#异步函数相加两个数字"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">异步函数相加两个数字</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pomise-出现之前的世界-回调（Callback）"><span class="nav-number">7.1.2.</span> <span class="nav-text">Pomise 出现之前的世界: 回调（Callback）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果你想做一系列的异步操作怎么办？？"><span class="nav-number">7.2.</span> <span class="nav-text">如果你想做一系列的异步操作怎么办？？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逃离回调地狱"><span class="nav-number">7.3.</span> <span class="nav-text">逃离回调地狱</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新鲜出炉的属性-监控属性-observables"><span class="nav-number">8.</span> <span class="nav-text">新鲜出炉的属性: 监控属性(observables)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gakkispy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

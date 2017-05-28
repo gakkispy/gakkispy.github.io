@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gakkispy.github.io/2017/05/28/es6-promise/</loc>
+    
+    <lastmod>2017-05-28T11:06:23.320Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://gakkispy.github.io/about/index.html</loc>
     
     <lastmod>2017-05-24T05:25:58.409Z</lastmod>
