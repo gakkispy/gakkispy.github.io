@@ -1,0 +1,38 @@
+.sidebar dd i {
+	width: 16px;
+}
+
+.main .fa-hand-o-down {
+	width: 36px;
+}
+
+.sidebar .fa-hand-o-down {
+	width: 22px;
+}
+
+.sidebar,.circle {
+	background: #57beb8;
+}
+
+.exp {
+	border-color: #57beb8;
+}
+
+.main-info dt {
+	color: #57beb8;
+	border-color: #57beb8;
+}
+
+.note,.main h3,.main h3 a{
+	color: #048c7f;
+}
+
+.source {
+    font-size: 12px;
+    border: 1px solid #f25d8e;
+    color: #F25D8E !important;
+    padding: 1px 3px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 7px;
+}
