@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="慕课网,React,React属性,React事件," />
+  <meta name="keywords" content="Node.js,并发," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="State 属性 state 对于模块属于 自身 属性 初始化,ex:this.state = {username:&amp;quot;Parry&amp;quot;}; 初始化可以放置在构造函数的constructor里 修改,ex:state: this.setState({username:&amp;quot;IMOOC&amp;quot;}); state 的作用域只属于当前的类，不污染其他模块">
-<meta name="keywords" content="慕课网,React,React属性,React事件">
+<meta name="description" content="最近学习 Node.JS,很多教程都是在 Node 早期版本发布的，控制并发的手段大多使用 eventproxy,或者是一些其他的第三方库类似于bluebird,async。而 Node.JS 早已实现对原生async/await 的支持，而且我学习的框架是 koa2，也是使用async/await的一个框架。为了避免语法混乱，我希望有一个使用async/await的并发控制模块。">
+<meta name="keywords" content="Node.js,并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React属性与事件">
-<meta property="og:url" content="https://gakkispy.github.io/2017/04/01/react-prop/index.html">
+<meta property="og:title" content="async-await-parallel">
+<meta property="og:url" content="https://gakkispy.github.io/2017/06/30/async-await-parallel/index.html">
 <meta property="og:site_name" content="红头发的韦斯莱">
-<meta property="og:description" content="State 属性 state 对于模块属于 自身 属性 初始化,ex:this.state = {username:&amp;quot;Parry&amp;quot;}; 初始化可以放置在构造函数的constructor里 修改,ex:state: this.setState({username:&amp;quot;IMOOC&amp;quot;}); state 的作用域只属于当前的类，不污染其他模块">
-<meta property="og:updated_time" content="2017-04-01T10:34:01.054Z">
+<meta property="og:description" content="最近学习 Node.JS,很多教程都是在 Node 早期版本发布的，控制并发的手段大多使用 eventproxy,或者是一些其他的第三方库类似于bluebird,async。而 Node.JS 早已实现对原生async/await 的支持，而且我学习的框架是 koa2，也是使用async/await的一个框架。为了避免语法混乱，我希望有一个使用async/await的并发控制模块。">
+<meta property="og:updated_time" content="2017-06-30T06:17:58.407Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React属性与事件">
-<meta name="twitter:description" content="State 属性 state 对于模块属于 自身 属性 初始化,ex:this.state = {username:&amp;quot;Parry&amp;quot;}; 初始化可以放置在构造函数的constructor里 修改,ex:state: this.setState({username:&amp;quot;IMOOC&amp;quot;}); state 的作用域只属于当前的类，不污染其他模块">
+<meta name="twitter:title" content="async-await-parallel">
+<meta name="twitter:description" content="最近学习 Node.JS,很多教程都是在 Node 早期版本发布的，控制并发的手段大多使用 eventproxy,或者是一些其他的第三方库类似于bluebird,async。而 Node.JS 早已实现对原生async/await 的支持，而且我学习的框架是 koa2，也是使用async/await的一个框架。为了避免语法混乱，我希望有一个使用async/await的并发控制模块。">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://gakkispy.github.io/2017/04/01/react-prop/"/>
+  <link rel="canonical" href="https://gakkispy.github.io/2017/06/30/async-await-parallel/"/>
 
 
 
 
 
-  <title> React属性与事件 | 红头发的韦斯莱 </title>
+  <title> async-await-parallel | 红头发的韦斯莱 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -280,7 +280,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://gakkispy.github.io/2017/04/01/react-prop/">
+    <link itemprop="mainEntityOfPage" href="https://gakkispy.github.io/2017/06/30/async-await-parallel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="gakkispy">
@@ -301,7 +301,7 @@
             
             
               
-                React属性与事件
+                async-await-parallel
               
             
           </h2>
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-01T18:03:33+08:00">
-                2017-04-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T14:16:10+08:00">
+                2017-06-30
               </time>
             
 
@@ -379,70 +379,11 @@
       
 
       
-        <h2 id="State-属性"><a href="#State-属性" class="headerlink" title="State 属性"></a>State 属性</h2><ul>
-<li>state 对于模块属于 自身 属性</li>
-<li>初始化,ex:<br><code>this.state = {username:&quot;Parry&quot;};</code></li>
-<li>初始化可以放置在构造函数的constructor里</li>
-<li>修改,ex:<br><code>state: this.setState({username:&quot;IMOOC&quot;});</code></li>
-<li>state 的作用域只属于当前的类，不污染其他模块<a id="more"></a>
-<h2 id="Props-属性"><a href="#Props-属性" class="headerlink" title="Props 属性"></a>Props 属性</h2></li>
-<li>Props 对于模块来说属于 外来 属性</li>
-<li>传递参数：</li>
-<li>模块中接受参数,ex： <br><code>this.props.username</code></li>
-</ul>
-<h2 id="事件与数据的双向绑定"><a href="#事件与数据的双向绑定" class="headerlink" title="事件与数据的双向绑定"></a>事件与数据的双向绑定</h2><ul>
-<li>事件的绑定<ul>
-<li>注意ES6的语法<ol>
-<li>可以在构造函数里绑定，ex：<br><code>this.forceUpdateHandler = this.forceUpdateHandcler.bind(this);</code></li>
-<li>调用时绑定，ex：<br><code>onlick = {this.changeUserInfo.bind(this,50)}</code></li>
-</ol>
-</li>
-</ul>
-</li>
-<li>子页面向父页面传递参数的方法<ul>
-<li>在子页面中通过调用父页面传递过来的事件props进行组件间的参数传递</li>
-<li>onChange与传统onBlur之间的差异</li>
-</ul>
-</li>
-</ul>
-<h2 id="可复用组件"><a href="#可复用组件" class="headerlink" title="可复用组件"></a>可复用组件</h2><ul>
-<li><p><a href="https://facebook.github.io/react/docs/reusable-components.html" target="_blank" rel="external">Prop 验证</a></p>
-<ul>
-<li><p>ex:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> propTypes=&#123;<span class="attr">id</span>:PropTypes.numberr.isRequired,<span class="attr">url</span>:PropTypes.string.isRequired,<span class="attr">text</span>: PropTypes.string&#125;;</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用方法，ex:<br><code>BodyIndex.propTypes = {userid:React.PropTypes.number.isRequired};</code></p>
-</li>
-</ul>
-</li>
-<li>默认 Prop 值<ul>
-<li>ex：<br><code>const defaultProps = {text: &#39;Hello World&#39;};</code></li>
-<li>使用方法，ex:<br><code>BodyIndex.defaultProps = defaultProps;</code></li>
-</ul>
-</li>
-<li>传递所有参数的快捷方式<ul>
-<li>ex:<br><code>&lt;Component{...this.props} more = &quot;values&quot; /&gt;</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="组件的-Refs"><a href="#组件的-Refs" class="headerlink" title="组件的 Refs"></a>组件的 Refs</h2><ul>
-<li><p>原始获取方法，ex:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myDiv = <span class="built_in">document</span>.getElementById(<span class="string">'myDiv'</span>);</div><div class="line">ReactDom.findeDomNode(myDiv).style.color = <span class="string">'red'</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>方法二的获取，ex：<br><code>this.refs.myInput</code></p>
-</li>
-<li>Refs 是访问到组件内部DOM节点唯一可靠的方法</li>
-<li>Refs 会自动销毁对子组件的引用</li>
-<li>不要再 render 或 render 之前对 Refs 进行调用</li>
-<li>避免滥用 Refs</li>
-</ul>
-<h2 id="独立组件间共享-MIxins"><a href="#独立组件间共享-MIxins" class="headerlink" title="独立组件间共享 MIxins"></a><a href="https://facebook.github.io/react/docs/reusable-components.html#mixins" target="_blank" rel="external">独立组件间共享 MIxins</a></h2><ul>
-<li>不同组件之间共用功能、共享代码</li>
-<li>和页面具有类似的生命周期</li>
-<li><a href="https://github.com/brigand/react-mixin" target="_blank" rel="external">ES6下的使用需要安装插件</a></li>
-<li><a href="https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html" target="_blank" rel="external">关于 Mixins 的讨论文章</a></li>
-</ul>
-
+        <p>最近学习 Node.JS,很多教程都是在 Node 早期版本发布的，控制并发的手段大多使用 <code>eventproxy</code>,或者是一些其他的第三方库类似于<code>bluebird</code>,<code>async</code>。而 Node.JS 早已实现对原生<code>async/await</code> 的支持，而且我学习的框架是 <code>koa2</code>，也是使用<code>async/await</code>的一个框架。为了避免语法混乱，我希望有一个使用<code>async/await</code>的并发控制模块。</p>
+<a id="more"></a>
+<h2 id="async-await-parallel"><a href="#async-await-parallel" class="headerlink" title="async-await-parallel"></a>async-await-parallel</h2><p>很简单的一个模块，本质是一个<code>Promise</code> 的队列函数，我还没有读懂源码，但是它的语法是<code>asycn/await</code>，没有更多的api，非常简单易用的一个模块。<br><strong>用法：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">const parallel = require(&apos;async-await-parallel&apos;)</div><div class="line"></div><div class="line">await parallel([</div><div class="line">  async () =&gt; &#123; ... &#125;,</div><div class="line">  async () =&gt; &#123; ... &#125;,</div><div class="line">  async () =&gt; &#123; ... &#125;,</div><div class="line">  async () =&gt; &#123; ... &#125;,</div><div class="line">  async () =&gt; &#123; ... &#125;,</div><div class="line">], 2)</div></pre></td></tr></table></figure></p>
+<p>就是这么简单，第一个参数是 <code>async</code> 函数数组，第二个参数是并发数</p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">parallelMap</span> (<span class="params">thunks, concurrency = <span class="number">5</span></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (concurrency &gt; <span class="number">0</span>) &#123;</div><div class="line">    concurrency = <span class="built_in">Math</span>.min(concurrency, thunks.length)</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    concurrency = thunks.length</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">let</span> index = <span class="number">0</span></div><div class="line">  <span class="keyword">let</span> results = [ ]</div><div class="line"></div><div class="line">  <span class="keyword">await</span> parallelPool(concurrency, <span class="keyword">async</span> () =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (index &lt; thunks.length) &#123;</div><div class="line">      <span class="keyword">const</span> currentIndex = index++</div><div class="line">      <span class="keyword">const</span> thunk = thunks[currentIndex]</div><div class="line">      results[currentIndex] = <span class="keyword">await</span> thunk.call(<span class="keyword">this</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (index &lt; thunks.length)</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> results</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Executes a given async `task` multiple times in parallel with a guaranteed</div><div class="line"> * max concurrency given by `size`.</div><div class="line"> *</div><div class="line"> * The task should be an async function which resolves to a boolean for whether</div><div class="line"> * or not there are more tasks to process.</div><div class="line"> *</div><div class="line"> * If any single task fails (eg, returns a rejected Promise), the pool will drain</div><div class="line"> * any remaining active tasks and reject the resulting Promsie.</div><div class="line"> *</div><div class="line"> * @param &#123;Number&#125; size</div><div class="line"> * @param &#123;async Function(Void) =&gt; Boolean&#125; task</div><div class="line"> *</div><div class="line"> * @return &#123;Promise&lt;Void&gt;&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">parallelPool</span> (<span class="params">size, task</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> done = <span class="literal">false</span></div><div class="line">  <span class="keyword">let</span> active = <span class="number">0</span></div><div class="line">  <span class="keyword">let</span> errors = [ ]</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">poolIterator</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">while</span> (active &lt; size &amp;&amp; !done) &#123;</div><div class="line">        active++</div><div class="line"></div><div class="line">        task()</div><div class="line">          .then(<span class="function">(<span class="params">more</span>) =&gt;</span> &#123;</div><div class="line">            <span class="keyword">if</span> (--active &lt;= <span class="number">0</span> &amp;&amp; (done || !more)) &#123;</div><div class="line">              <span class="keyword">if</span> (errors.length &gt; <span class="number">0</span>) &#123;</div><div class="line">                <span class="comment">// at least one task failed</span></div><div class="line">                <span class="keyword">return</span> reject(<span class="keyword">new</span> <span class="built_in">Error</span>(errors))</div><div class="line">              &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="comment">// all tasks completed successfully</span></div><div class="line">                <span class="keyword">return</span> resolve()</div><div class="line">              &#125;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (more) &#123;</div><div class="line">              poolIterator()</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">              done = <span class="literal">true</span></div><div class="line">            &#125;</div><div class="line">          &#125;)</div><div class="line">          .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</div><div class="line">            errors.push(err)</div><div class="line">            done = <span class="literal">true</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> (--active &lt;= <span class="number">0</span>) &#123;</div><div class="line">              <span class="keyword">return</span> reject(<span class="keyword">new</span> <span class="built_in">Error</span>(errors))</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">              <span class="comment">// wait until all active tasks are drained before rejecting the</span></div><div class="line">              <span class="comment">// final result (no new tasks will be started now that we're in</span></div><div class="line">              <span class="comment">// this error state)</span></div><div class="line">            &#125;</div><div class="line">          &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    poolIterator()</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -471,13 +412,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
           
-            <a href="/tags/React/" rel="tag"># React</a>
-          
-            <a href="/tags/React属性/" rel="tag"># React属性</a>
-          
-            <a href="/tags/React事件/" rel="tag"># React事件</a>
+            <a href="/tags/并发/" rel="tag"># 并发</a>
           
         </div>
       
@@ -490,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/30/react-components/" rel="next" title="React组件基础">
-                <i class="fa fa-chevron-left"></i> React组件基础
+              <a href="/2017/05/28/es6-promise/" rel="next" title="给初学者的 JavaScript Promise 教程 | Scotch">
+                <i class="fa fa-chevron-left"></i> 给初学者的 JavaScript Promise 教程 | Scotch
               </a>
             
           </div>
@@ -499,10 +436,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/02/intel-amd/" rel="prev" title="【转】1800X不如7350K？牙膏厂疯狂公关">
-                【转】1800X不如7350K？牙膏厂疯狂公关 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -660,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#State-属性"><span class="nav-number">1.</span> <span class="nav-text">State 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Props-属性"><span class="nav-number">2.</span> <span class="nav-text">Props 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件与数据的双向绑定"><span class="nav-number">3.</span> <span class="nav-text">事件与数据的双向绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可复用组件"><span class="nav-number">4.</span> <span class="nav-text">可复用组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的-Refs"><span class="nav-number">5.</span> <span class="nav-text">组件的 Refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#独立组件间共享-MIxins"><span class="nav-number">6.</span> <span class="nav-text">独立组件间共享 MIxins</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#async-await-parallel"><span class="nav-number">1.</span> <span class="nav-text">async-await-parallel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">2.</span> <span class="nav-text">源代码</span></a></li></ol></div>
             
 
           </div>
